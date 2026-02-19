@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all pages
  *
@@ -16,23 +17,23 @@ get_header();
 ?>
 
 <main role="main" class="site-main page-main">
-<?php
+	<?php
 
-if ( have_posts() ) :
-	while ( have_posts() ) :
-		the_post();
+	if (have_posts()) :
+		while (have_posts()) :
+			the_post();
 
-		get_template_part( 'template-parts/content', 'page' );
+			the_content();
 
 
-	endwhile; // End of the loop.
+		endwhile; // End of the loop.
 
-else :
+	else :
 
-	get_template_part( 'template-parts/content', 'none' );
+		get_template_part('template-parts/content', 'none');
 
-endif;
-?>
+	endif;
+	?>
 
 </main><!-- #main -->
 

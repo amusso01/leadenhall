@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying frontpage by default
  *
@@ -11,24 +12,25 @@ get_header();
 ?>
 
 <section class="site-hero">
-	
-	<?php get_template_part( 'components/front/hero' ); ?>
+
+	<?php get_template_part('components/front/hero'); ?>
 
 </section>
 
 <main class="main homepage-main" role="main">
 
-	<?php if ( have_posts() ) : ?>
+	<?php if (have_posts()) : ?>
 
-		<?php while ( have_posts() ) : the_post(); // @codingStandardsIgnoreLine ?>
+		<?php while (have_posts()) : the_post(); // @codingStandardsIgnoreLine 
+		?>
 
-			<?php get_template_part( 'template-parts/content', 'front' ) ?>
+			<?php the_content(); ?>
 
 		<?php endwhile; ?>
 
-	<?php else :?>
+	<?php else : ?>
 
-		<?php get_template_part( 'template-parts/content', 'none' );?>
+		<?php get_template_part('template-parts/content', 'none'); ?>
 
 	<?php endif; ?>
 

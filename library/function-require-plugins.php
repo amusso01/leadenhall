@@ -28,33 +28,13 @@ function bml_register_required_plugins()
       'required'  => true,
     ),
 
-    // Require Contact Form 7 Honeypot plugin
-    array(
-      'name'      => 'Honeypot for Contact Form 7',
-      'slug'      => 'contact-form-7-honeypot',
-      'required'  => true,
-    ),
-
-    // Require Contact Form CFDB7 plugin
-    array(
-      'name'      => 'Contact Form CFDB7',
-      'slug'      => 'contact-form-cfdb7',
-      'required'  => true,
-    ),
 
     // Require SVG Support plugin
     array(
       'name'      => 'SVG Support',
       'slug'      => 'svg-support',
       'required'  => true,
-    ),
-
-    // Require Favicon by RealFaviconGenerator plugin
-    array(
-      'name'      => 'Favicon by RealFaviconGenerator',
-      'slug'      => 'favicon-by-realfavicongenerator',
-      'required'  => true,
-    ),
+    )
 
 
   );

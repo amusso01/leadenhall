@@ -8,10 +8,11 @@
 /*==================================================================================
   FONT
 ==================================================================================*/
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 $text__fontname: "Raleway", sans-serif; // Normal 400, Medium 500, Bold 700
-$header__fontname: "Raleway", sans-serif; // Normal 400, Medium 500, Bold 700
+$header__fontname:
+	"Cormorant Garamond", serif; // Normal 400, Medium 500, Bold 700
 
 /*==================================================================================
   COLORS
@@ -24,8 +25,31 @@ $color__text: var(--text_color);
 $color__link: var(--link_color);
 $color__link-hover: var(--link_color_hover);
 $color__footerBg: var(--footer-color);
+$color__soft-white: #faf9f9;
+$color__soft-blue: #50617a;
+$color__grey: #ecebeb;
+$color__darkest-blue: #263143;
 $color__bright: #ffffff;
-$color__dark: #353434;
+$color__dark: #000;
+
+$colors:
+	(dark-blue, $color__text), (white, $color__bright),
+	(Soft-white, $color__soft-white), (orange, $color__main),
+	(darkest-blue, $color__darkest-blue), (soft-blue, $color__soft-blue),
+	(grey, $color__grey);
+
+/* Color Options
+--------------------------------------------- */
+
+@each $name, $color in $colors {
+	.has-#{$name}-color {
+		color: $color;
+	}
+
+	.has-#{$name}-background-color {
+		background-color: $color;
+	}
+}
 
 /*==================================================================================
   BUTTONS
