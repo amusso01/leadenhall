@@ -1,0 +1,41 @@
+/* PRESETS
+/––––––––––––––––––––––––*/
+
+@use "media" as *;
+
+.content-block {
+	//create the "container" with this applied to any row or any 100% width element
+	padding: 0 6.5rem;
+
+	@include media("<desktop") {
+		padding: 0 3.75rem;
+	}
+	@include media("<phone") {
+		padding: 0 1.2rem;
+	}
+}
+
+.content-max {
+	max-width: 1920px;
+	margin: 0 auto;
+
+	@include media("<wideScreen") {
+		max-width: 1520px;
+	}
+	@include media("<desktop") {
+		max-width: 1360px;
+	}
+}
+
+.noscroll {
+	overflow: hidden;
+}
+
+:focus {
+	outline: 0;
+}
+
+.img-fluid {
+	max-width: 100%;
+	height: auto;
+}

@@ -1,0 +1,59 @@
+/**
+  * Variables
+  * Contains re-usable variables like colors, sizes, etc.
+  * Breakpoints for the media() mixin live in common/_media.scss.
+  *
+  *
+  */
+/*==================================================================================
+  FONT
+==================================================================================*/
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600,800&display=swap");
+
+$text__fontname: "Raleway", sans-serif; // Normal 400, Medium 500, Bold 700
+$header__fontname: "Raleway", sans-serif; // Normal 400, Medium 500, Bold 700
+
+/*==================================================================================
+  COLORS
+==================================================================================*/
+
+/* from customiser root -> see function-customiser.php
+/––––––––––––––––––––––––*/
+$color__main: var(--main_color);
+$color__text: var(--text_color);
+$color__link: var(--link_color);
+$color__link-hover: var(--link_color_hover);
+$color__footerBg: var(--footer-color);
+$color__bright: #ffffff;
+$color__dark: #353434;
+
+/*==================================================================================
+  BUTTONS
+==================================================================================*/
+
+$button__color: $color__main;
+$button__width: 150px;
+$button__height: 45px;
+$button__radius: 30px;
+
+/*==================================================================================
+  TYPOGRAPHY
+==================================================================================*/
+
+$text__h1: var(--text-h1);
+$text__h2: var(--text-h2);
+$text__h3: var(--text-h3);
+$text__h4: var(--text-h4);
+$text__h5: var(--text-h5);
+$text__h6: var(--text-h6);
+$text__p: var(--text-p);
+
+$font__weight: 400; //This is the global font-weight for text, link etc.. Specify header weight separetelly
+
+%cover {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
