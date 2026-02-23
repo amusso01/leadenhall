@@ -53,7 +53,8 @@ function wpseed_register_theme_menus()
 {
   register_nav_menus([
     'mainmenu' => __('Main menu'),
-    'footermenu' => __('Footer menu')
+    'footermenumeet-us' => __('Footer menu meet us'),
+    'footermenuwork-with-us' => __('Footer menu work with us'),
   ]);
 }
 add_action('init', 'wpseed_register_theme_menus');
