@@ -1,11 +1,15 @@
 @use "../common/variables" as *;
-
-.hidden_mobile {
-	display: none;
-}
+@use "../common/mixin" as *;
+@use "../common/media" as *;
 
 .site-header {
-	background-color: $color__main;
+	padding: 6px 0;
+	background-color: $color__soft-white;
+	position: relative;
+	&.hidden_mobile {
+		display: none;
+	}
+
 	&__inner {
 		display: flex;
 		align-items: center;
@@ -16,40 +20,154 @@
 	}
 	&__logo {
 		max-width: 250px;
+		a {
+			display: block;
+			line-height: 0;
+		}
 	}
 	&__hamburger {
-		display: block;
+		display: none;
+		margin-left: auto;
+		flex-grow: 0;
+
+		@include media("<tablet") {
+			display: block;
+		}
 	}
+
+	.primary-menu-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@include media("<tablet") {
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.3s ease-in-out 0s;
+			pointer-events: none;
+			transform: translateY(-10px);
+
+			&.active {
+				visibility: visible;
+				opacity: 1;
+				pointer-events: auto;
+				transform: translateY(0);
+			}
+
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+			position: absolute;
+			top: 100%;
+			padding: 20px 3.125rem;
+			left: 0;
+			width: 100%;
+			background-color: $color__soft-white;
+			height: calc(100vh - 60px);
+			z-index: 10;
+		}
+
+		@include media("<phone") {
+			padding: 20px 1.25rem;
+		}
+
+		.fdry-nav-button {
+			@include media("<tablet") {
+				margin-top: 1.5rem;
+			}
+		}
+	}
+
 	&__menu {
 		flex-grow: 2;
+		margin-right: 46px;
+		position: relative;
+
+		@include media("<desktop") {
+			margin-right: 25px;
+		}
+
+		@include media("<tablet") {
+			flex-grow: 0;
+		}
 		> ul {
 			display: flex;
 			justify-content: flex-end;
+
+			@include media("<tablet") {
+				flex-direction: column;
+				align-items: flex-start;
+			}
 		}
 		.menu-item {
-			margin-left: 20px;
+			margin-left: 30px;
+
+			@include media("<desktop") {
+				margin-left: 20px;
+			}
+
+			@include media("<tablet") {
+				margin-left: 0;
+				margin-bottom: 7px;
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+
 			&:first-of-type {
 				margin-left: 0px;
 			}
 			> a {
-				font-weight: 600;
+				font-size: 15px;
+				font-weight: 400;
+				color: $color__text;
+				text-transform: uppercase;
+				@include animated-underline();
+				&:hover {
+					@include animated-underline-hover();
+				}
 			}
 		}
 	}
-	&__social {
-		flex-grow: 0;
-		display: flex;
-		margin-left: 20px;
-		> li {
-			margin-right: 8px;
-			&:last-of-type {
-				margin-right: none;
-			}
+
+	.sub-menu {
+		position: absolute;
+		z-index: 10;
+		background-color: $color__soft-white;
+		padding: 30px 20px 15px;
+		border-radius: 5px;
+
+		transform: translateY(-10px);
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease-in-out 0s;
+		pointer-events: none;
+
+		@include media("<tablet") {
+			padding: 20px;
+			width: 100vw;
+			min-width: 100%;
+			max-width: calc(100vw - 2.5rem); // avoid overflow on small screens
 		}
-		svg {
-			vertical-align: middle;
-			width: 25px;
-			height: 25px;
+		&.active {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+		}
+
+		.menu-item {
+			margin-left: 0;
+			margin-bottom: 7px;
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+
+			@include media("<tablet") {
+				> a {
+					white-space: nowrap;
+				}
+			}
 		}
 	}
 }

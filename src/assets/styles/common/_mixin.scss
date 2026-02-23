@@ -21,13 +21,18 @@
 	$upper-range: 900px
 ) {
 	font-size: calc(
-		#{$min-font-size} + #{(
+		#{$min-font-size} +
+			#{(
 				($max-font-size / ($max-font-size * 0 + 1)) -
 					($min-font-size / ($min-font-size * 0 + 1))
-			)} * ((100vw - #{$lower-range}) / #{(
+			)} *
+			(
+				(100vw - #{$lower-range}) /
+					#{(
 						($upper-range / ($upper-range * 0 + 1)) -
 							($lower-range / ($lower-range * 0 + 1))
-					)})
+					)}
+			)
 	);
 
 	@media screen and (max-width: $lower-range) {
@@ -135,16 +140,15 @@
 		content: "";
 		position: absolute;
 		width: 100%;
-		height: 2px;
-		bottom: 0;
+		height: 1px;
+		bottom: -2px;
 		left: 0;
 		background-color: currentColor;
 		visibility: hidden;
 		-webkit-transform: scaleX(0);
 		transform: scaleX(0);
-		-webkit-transition: all var(--transition-duration-slow)
-			var(--transition-easing) 0s;
-		transition: all var(--transition-duration-slow) var(--transition-easing) 0s;
+		-webkit-transition: all 0.3s ease-in-out 0s;
+		transition: all 0.3s ease-in-out 0s;
 	}
 }
 @mixin animated-underline-hover() {

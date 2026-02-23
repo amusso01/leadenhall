@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The starting point for setting up a new theme.
  * Go through this file to setup your preferences
@@ -48,20 +49,21 @@ $GTM_id = '';
 // loads wordpress-menus, add your custom menus here or remove if not needed
 // by default, only 'mainmenu' is shown
 // => https://codex.wordpress.org/Function_Reference/register_nav_menus
-function wpseed_register_theme_menus() {
+function wpseed_register_theme_menus()
+{
   register_nav_menus([
     'mainmenu' => __('Main menu'),
     'footermenu' => __('Footer menu')
   ]);
 }
-add_action( 'init', 'wpseed_register_theme_menus');
+add_action('init', 'wpseed_register_theme_menus');
 
 
 /*==================================================================================
   5.0 SETUP LOGIN PAGE 
 ==================================================================================*/
 
-$gFontUrl = "https://fonts.googleapis.com/css?family=Girassol&display=swap";
-$fontFamily = "'Girassol', cursive";
-$customLogo = get_stylesheet_directory_uri()."/dist/images/foundry-logo.svg";
-$mainColor = "#ff0000";
+$gFontUrl = "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap";
+$fontFamily = "'Raleway', sans-serif";
+$customLogo = get_stylesheet_directory_uri() . "/dist/images/Logo.svg";
+$mainColor = "#FF844C";

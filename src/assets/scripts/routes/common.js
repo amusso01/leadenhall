@@ -1,5 +1,6 @@
 import smoothscroll from "smoothscroll-polyfill";
-
+import hamburger from "../part/hamburger";
+import navigation from "../part/navigation";
 export default {
 	init() {
 		// JavaScript to be fired on all pages
@@ -9,6 +10,9 @@ export default {
 
 		// Hamburger event listener
 		hamburger();
+
+		// Navigation event listener
+		navigation();
 	},
 
 	finalize() {

@@ -143,6 +143,7 @@ wrapp certain block with div
 Register back-end CSS editor
 ==================================================================================*/
 add_theme_support('editor-styles');
+add_editor_style('./dist/styles/root.css');
 add_editor_style('./dist/styles/main.css');
 /*==================================================================================
 Register new category in guttenberg block
@@ -167,6 +168,15 @@ LOAD CUSTOM ACF-GUTENBERG-BLOCKS
 ==================================================================================*/
 
 require get_template_directory() . '/components/blocks/accordion-block.php';
+require get_template_directory() . '/components/blocks/hero-block.php';
+require get_template_directory() . '/components/blocks/animated-numbers-block.php';
+require get_template_directory() . '/components/blocks/global-map-block.php';
+require get_template_directory() . '/components/blocks/image-text-grid-block.php';
+require get_template_directory() . '/components/blocks/cards-grid-block.php';
+require get_template_directory() . '/components/blocks/icon-grid-block.php';
+require get_template_directory() . '/components/blocks/history-slider-block.php';
+require get_template_directory() . '/components/blocks/testimonial-block.php';
+require get_template_directory() . '/components/blocks/marquee-block.php';
 
 
 /**

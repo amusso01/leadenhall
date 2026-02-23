@@ -274,11 +274,16 @@ function we_login_logo()
 			<?php endif; ?>
 		}
 
+		body.login {
+			background-color: #263143;
+		}
+
 		#login h1 a,
 		.login h1 a {
 			background-image: url(<?php echo $customLogo ?>);
 			background-repeat: no-repeat;
-			background-size: 70px;
+			background-size: 270px;
+			width: 100%;
 			<?php if ($fontFamily): ?>font-family: <?php echo $fontFamily ?> !important;
 			<?php endif; ?>
 		}
@@ -319,6 +324,13 @@ function we_login_logo()
 		body.login div#login form#loginform input[type="password"]:focus {
 			border-color: <?php echo $mainColor ?>;
 			box-shadow: 0 0 0 1px <?php echo $mainColor ?>;
+		}
+
+		body.login #nav a,
+		body.login #backtoblog a,
+		body.login .privacy-policy-page-link a,
+		body.login .dashicons-translation {
+			color: #fff;
 		}
 
 		body.login div#login form#loginform div.wp-pwd button.button .dashicons {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Hamburger
  * 
@@ -8,8 +9,6 @@
  */
 ?>
 
-<button class="site-header__item site-header__hamburger hamburger hamburger--collapse " id="hamburger" type="button">
-    <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-    </span>
-</button><!-- hamburger  -->
+<div class="site-header__item site-header__hamburger" id="hamburger" type="button">
+    <div class="hamburger-menu"></div>
+</div><!-- hamburger  -->
