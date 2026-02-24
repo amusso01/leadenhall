@@ -22,19 +22,15 @@ if (function_exists('acf_register_block')) {
     'title'             => __('Accordion block'),
     'description'       => __('Accordion block'),
     'render_callback'   => 'foundry_gutenblock_accordionBlock',
+    'mode'             => 'edit',
     'supports' => [
       'align'           => ['wide', 'center', 'full'],
     ],
     'category'         => 'foundry-category', // common, formatting, layout, widgets, embed
     'icon' => array(
-      // Specifying a background color to appear with the icon e.g.: in the inserter.
       'background' => '#323C4E ',
-      // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
       'foreground' => '#ffffff',
-      // Specifying a dashicon for the block
       'src' => 'editor-table',
-      'mode'           => 'edit',
-      'align'             => 'full',
     ),
     'keywords'         => ['foundry', 'accordion', 'faqs']
   ));
@@ -45,27 +41,36 @@ if (function_exists('acf_register_block')) {
 
 // CHECK LIGHTNESS OF AN HEX COLOR
 
-function foundry_gutenblock_accordionBlock()
+function foundry_gutenblock_accordionBlock($block, $content = '', $is_preview = false)
 {
+  // OPTIONS
+  $padding_top   = get_field('padding_top');
+  $padding_bottom = get_field('padding_bottom');
 
-  // Get Options
+  // CONTENT
   $accordion = get_field('accordion');
 
+  // Unique block ID for per-block styling (used in scoped <style> and SCSS)
+  $block_id = 'fd-accordion-' . ($block['id'] ?? uniqid());
 
-  // Get Content
-
-
-
-
-  // Return HTML
+  // Output CSS custom properties in a scoped <style> so SCSS can use them + media queries
+  $pt = ('' !== $padding_top && null !== $padding_top) ? max(0, min(200, (int) $padding_top)) : null;
+  $pb = ('' !== $padding_bottom && null !== $padding_bottom) ? max(0, min(200, (int) $padding_bottom)) : null;
+  $has_padding = $pt !== null || $pb !== null;
 ?>
 
-  <section class="accordion-block">
-
-    <div class="accordion-block__wrapper">
-      <div class="content-block">
-
-        <div class="accordion-block__inner ">
+<?php if ($has_padding) : ?>
+  <style>
+    #<?php echo esc_attr($block_id); ?> {
+      <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;<?php endif; ?>
+      <?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;<?php endif; ?>
+    }
+  </style>
+<?php endif; ?>
+  <section id="<?php echo esc_attr($block_id); ?>" class="accordion-block<?php echo $has_padding ? ' fdry-block-padding' : ''; ?>">
+    <div class="content-block">
+      <div class="accordion-block__wrapper">
+        <div class="accordion-block__inner">
 
           <?php if ($accordion) :  ?>
             <div class="accordion-container">
@@ -83,10 +88,8 @@ function foundry_gutenblock_accordionBlock()
           <?php endif; ?>
 
         </div>
-
       </div>
     </div>
-
   </section>
 
 

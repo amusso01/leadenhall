@@ -22,19 +22,15 @@ if (function_exists('acf_register_block')) {
     'title'             => __('Image text grid block'),
     'description'       => __('Image text grid block'),
     'render_callback'   => 'foundry_gutenblock_imageTextGridBlock',
+    'mode'             => 'edit',
     'supports' => [
       'align'           => ['wide', 'center', 'full'],
     ],
-    'category'         => 'foundry-category', // common, formatting, layout, widgets, embed
+    'category'         => 'foundry-category',
     'icon' => array(
-      // Specifying a background color to appear with the icon e.g.: in the inserter.
       'background' => '#323C4E ',
-      // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
       'foreground' => '#ffffff',
-      // Specifying a dashicon for the block
       'src' => 'editor-table',
-      'mode'           => 'edit',
-      'align'             => 'full',
     ),
     'keywords'         => ['foundry', 'image', 'text', 'grid']
   ));
@@ -45,15 +41,34 @@ if (function_exists('acf_register_block')) {
 
 function foundry_gutenblock_imageTextGridBlock($block, $content = '', $is_preview = false)
 {
+  // OPTIONS
   $background_color = get_field('background_color');
   $image_left = get_field('image_left');
+  $padding_top   = get_field('padding_top');
+  $padding_bottom = get_field('padding_bottom');
+
+  // CONTENT
   $items = get_field('items');
 
   $block_id = 'fd-image-text-grid-' . ($block['id'] ?? uniqid());
+  $pt = ('' !== $padding_top && null !== $padding_top) ? max(0, min(200, (int) $padding_top)) : null;
+  $pb = ('' !== $padding_bottom && null !== $padding_bottom) ? max(0, min(200, (int) $padding_bottom)) : null;
+  $has_padding = $pt !== null || $pb !== null;
+
   $image_left_class = $image_left ? 'image-left' : 'image-right';
   $style = $background_color ? sprintf(' style="background-color: %s;"', esc_attr($background_color)) : '';
   ?>
-  <div id="<?php echo esc_attr($block_id); ?>" class="fd-image-text-grid-block <?php echo esc_attr($image_left_class); ?>"<?php echo $style; ?>>
+<?php if ($has_padding) : ?>
+  <style>
+    #<?php echo esc_attr($block_id); ?> {
+      <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;<?php endif; ?>
+      <?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;<?php endif; ?>
+    }
+  </style>
+<?php endif; ?>
+  <section id="<?php echo esc_attr($block_id); ?>" class="fd-image-text-grid-block <?php echo esc_attr($image_left_class); ?><?php echo $has_padding ? ' fdry-block-padding' : ''; ?>"<?php echo $style; ?>>
+    <div class="content-block">
+      <div class="fd-image-text-grid-block__wrapper">
     <?php if (!empty($items) && is_array($items)) : ?>
       <div class="fd-image-text-grid__items">
         <?php foreach ($items as $item) :
@@ -84,6 +99,8 @@ function foundry_gutenblock_imageTextGridBlock($block, $content = '', $is_previe
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
-  </div>
+      </div>
+    </div>
+  </section>
   <?php
 }

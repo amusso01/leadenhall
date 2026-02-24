@@ -93,51 +93,28 @@ ADD JS
 // add_action('enqueue_block_editor_assets', 'my_block_plugin_editor_scripts');
 
 /*==================================================================================
-wrapp certain block with div
+Wrap certain blocks with a div (narrow-width / content-block)
 ==================================================================================*/
-// function wporg_block_wrapper($block_content, $block)
-// {
-// 	if ($block['blockName'] === 'core/paragraph') {
-// 		$content = '<div class="wp-block-paragraph narrow-width__container content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/heading') {
-// 		$content = '<div class="wp-block-title narrow-width__container content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/image') {
-// 		$content = '<div class="wp-block-image narrow-width__container content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/separator') {
-// 		$content = '<div class="wp-block-separator narrow-width__container content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/list') {
-// 		$content = '<div class="wp-block-list narrow-width__container content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/table') {
-// 		$content = '<div class="wp-block-table content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	} elseif ($block['blockName'] === 'core/embed') {
-// 		$content = '<div class="wp-block-embed__wrapper content-block">';
-// 		$content .= $block_content;
-// 		$content .= '</div>';
-// 		return $content;
-// 	}
+function fdry_block_wrapper($block_content, $block)
+{
+	$block_name = $block['blockName'] ?? '';
 
-// 	return $block_content;
-// }
+	$wrappers = array(
+		'core/paragraph'  => 'wp-block-paragraph  content-block',
+		'core/heading'    => 'wp-block-title  content-block',
+		'core/image'      => 'wp-block-image  content-block',
+		'core/separator'  => 'wp-block-separator  content-block',
+		'core/list'       => 'wp-block-list  content-block',
+		'core/embed'      => 'wp-block-embed__wrapper content-block',
+	);
 
-// add_filter('render_block', 'wporg_block_wrapper', 10, 2);
+	if (!empty($wrappers[$block_name])) {
+		return '<div class="' . esc_attr($wrappers[$block_name]) . '">' . $block_content . '</div>';
+	}
+
+	return $block_content;
+}
+add_filter('render_block', 'fdry_block_wrapper', 10, 2);
 
 /*==================================================================================
 Register back-end CSS editor

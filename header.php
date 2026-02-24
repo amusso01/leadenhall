@@ -34,7 +34,7 @@
 
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'foundry'); ?></a>
-		<header class="site-header">
+		<header class="site-header <?= is_front_page() ? 'home-header' : '' ?>">
 			<div class="site-header__inner content-block">
 				<?php get_template_part('components/header/logo'); ?>
 				<?php get_template_part('components/navigation/primary'); ?>

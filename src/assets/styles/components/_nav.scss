@@ -6,6 +6,41 @@
 	padding: 6px 0;
 	background-color: $color__soft-white;
 	position: relative;
+
+	&.home-header {
+		background-color: transparent;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 9;
+
+		color: $color__soft-white;
+
+		.site-header__menu {
+			> ul {
+				> .menu-item {
+					> a {
+						color: $color__soft-white;
+					}
+				}
+			}
+		}
+
+		.site-header__logo {
+			svg {
+				path {
+					fill: $color__soft-white;
+				}
+			}
+		}
+
+		.sub-menu {
+			padding: 15px 20px 15px;
+			border-radius: 2px;
+		}
+	}
+
 	&.hidden_mobile {
 		display: none;
 	}
@@ -161,6 +196,10 @@
 			margin-bottom: 7px;
 			&:last-of-type {
 				margin-bottom: 0;
+			}
+
+			> a {
+				text-transform: none;
 			}
 
 			@include media("<tablet") {

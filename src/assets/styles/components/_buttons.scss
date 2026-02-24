@@ -7,7 +7,7 @@
 	min-height: $button__height;
 	background-color: $button__color;
 	text-decoration: none;
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	color: $color__bright;
@@ -19,5 +19,14 @@
 	&:hover {
 		background-color: $color__text;
 		color: $color__bright;
+	}
+
+	&--white {
+		background-color: $color__bright;
+		color: $color__dark;
+		&:hover {
+			background-color: $color__text;
+			color: $color__bright;
+		}
 	}
 }

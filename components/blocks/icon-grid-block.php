@@ -22,19 +22,15 @@ if (function_exists('acf_register_block')) {
     'title'             => __('Icon grid block'),
     'description'       => __('Icon grid block'),
     'render_callback'   => 'foundry_gutenblock_iconGridBlock',
+    'mode'             => 'edit',
     'supports' => [
       'align'           => ['wide', 'center', 'full'],
     ],
-    'category'         => 'foundry-category', // common, formatting, layout, widgets, embed
+    'category'         => 'foundry-category',
     'icon' => array(
-      // Specifying a background color to appear with the icon e.g.: in the inserter.
       'background' => '#323C4E ',
-      // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
       'foreground' => '#ffffff',
-      // Specifying a dashicon for the block
       'src' => 'editor-table',
-      'mode'           => 'edit',
-      'align'             => 'full',
     ),
     'keywords'         => ['foundry', 'icon', 'grid']
   ));
@@ -43,49 +39,69 @@ if (function_exists('acf_register_block')) {
 /* Render Block
  /––––––––––––––––––––––––*/
 
-function foundry_gutenblock_iconGridBlock()
+function foundry_gutenblock_iconGridBlock($block, $content = '', $is_preview = false)
 {
+  // OPTIONS
   $background_color = get_field('background_color');
   $grid_columns = get_field('grid_column_number') ?: 3;
+  $padding_top   = get_field('padding_top');
+  $padding_bottom = get_field('padding_bottom');
+
+  // CONTENT
   $items = get_field('items');
 
   if (empty($items) || !is_array($items)) {
     return;
   }
 
+  $block_id = 'fd-icon-grid-' . ($block['id'] ?? uniqid());
+  $pt = ('' !== $padding_top && null !== $padding_top) ? max(0, min(200, (int) $padding_top)) : null;
+  $pb = ('' !== $padding_bottom && null !== $padding_bottom) ? max(0, min(200, (int) $padding_bottom)) : null;
+  $has_padding = $pt !== null || $pb !== null;
+
   $block_style = $background_color ? sprintf(' style="background-color: %s;"', esc_attr($background_color)) : '';
   $grid_class = 'fd-icon-grid--cols-' . (int) $grid_columns;
-  ?>
-  <div class="fd-icon-grid <?php echo esc_attr($grid_class); ?>"<?php echo $block_style; ?>>
-    <div class="fd-icon-grid__inner">
-      <?php foreach ($items as $item) : ?>
-        <?php
-        $icon = $item['icon'] ?? null;
-        $title = $item['title'] ?? '';
-        $link = $item['link'] ?? null;
-        $content = $item['content'] ?? '';
-        $link_url = is_array($link) ? ($link['url'] ?? '') : '';
-        $link_title = is_array($link) ? ($link['title'] ?? '') : '';
-        $link_target = is_array($link) ? ($link['target'] ?? '_self') : '_self';
-        ?>
-        <div class="fd-icon-grid__item">
-          <?php if ($icon && !empty($icon['url'])) : ?>
-            <div class="fd-icon-grid__icon">
-              <img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt'] ?? $title); ?>" loading="lazy" />
+?>
+  <?php if ($has_padding) : ?>
+    <style>
+      #<?= esc_attr($block_id); ?> {
+        <?php if ($pt !== null) : ?>--padding-pt: <?= (int) $pt; ?>px;
+        <?php endif; ?><?php if ($pb !== null) : ?>--padding-pb: <?= (int) $pb; ?>px;
+        <?php endif; ?>
+      }
+    </style>
+  <?php endif; ?>
+  <section id="<?= esc_attr($block_id); ?>" class="fd-icon-grid <?= esc_attr($grid_class); ?><?= $has_padding ? ' fdry-block-padding' : ''; ?>" <?= $block_style; ?>>
+    <div class="content-block">
+      <div class="fd-icon-grid__wrapper">
+        <div class="fd-icon-grid__grid columns-<?= $grid_columns; ?>">
+          <?php foreach ($items as $item) : ?>
+            <?php
+            $icon = $item['icon'] ?? null;
+            $title = $item['title'] ?? '';
+            $link_url = isset($item['link']) && is_string($item['link']) ? trim($item['link']) : '';
+            $content = $item['content'] ?? '';
+            ?>
+            <div class="fd-icon-grid__item">
+              <?php if ($title) : ?>
+                <h5 class="fd-icon-grid__title"><?= esc_html($title); ?></h5>
+              <?php endif; ?>
+              <?php if ($icon && !empty($icon['url'])) : ?>
+                <div class="fd-icon-grid__icon">
+                  <img src="<?= esc_url($icon['url']); ?>" alt="<?= esc_attr($icon['alt'] ?? $title); ?>" loading="lazy" />
+                </div>
+              <?php endif; ?>
+              <?php if ($content) : ?>
+                <div class="fd-icon-grid__content"><?= nl2br(esc_html($content)); ?></div>
+              <?php endif; ?>
+              <?php if ($link_url) : ?>
+                <a href="<?= esc_url($link_url); ?>" class="fd-icon-grid__link">Find Out More</a>
+              <?php endif; ?>
             </div>
-          <?php endif; ?>
-          <?php if ($title) : ?>
-            <h3 class="fd-icon-grid__title"><?php echo esc_html($title); ?></h3>
-          <?php endif; ?>
-          <?php if ($content) : ?>
-            <div class="fd-icon-grid__content"><?php echo nl2br(esc_html($content)); ?></div>
-          <?php endif; ?>
-          <?php if ($link_url) : ?>
-            <a href="<?php echo esc_url($link_url); ?>" class="fd-icon-grid__link"<?php echo $link_target === '_blank' ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html($link_title ?: $link_url); ?></a>
-          <?php endif; ?>
+          <?php endforeach; ?>
         </div>
-      <?php endforeach; ?>
+      </div>
     </div>
-  </div>
-  <?php
+  </section>
+<?php
 }

@@ -21,6 +21,42 @@
             "selected": 0
         },
         {
+            "key": "field_63f62b0026fd32",
+            "label": "Padding top",
+            "name": "padding_top",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "The value is in pixels (px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "",
+            "min": 0,
+            "max": 200,
+            "placeholder": "",
+            "step": "1",
+            "prepend": "",
+            "append": "px"
+        },
+        {
+            "key": "field_63f62b0026fd33",
+            "label": "Padding bottom",
+            "name": "padding_bottom",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "The value is in pixels (px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "",
+            "min": 0,
+            "max": 200,
+            "placeholder": "",
+            "step": "1",
+            "prepend": "",
+            "append": "px"
+        },
+        {
             "key": "field_63f62b2862ab6",
             "label": "Content",
             "name": "",
@@ -58,5 +94,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771518000
+    "modified": 1771955200
 }

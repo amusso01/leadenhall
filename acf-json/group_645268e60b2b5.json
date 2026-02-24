@@ -3,6 +3,68 @@
     "title": "Accordion Block",
     "fields": [
         {
+            "key": "field_645362a070226",
+            "label": "Options",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_645362a070227",
+            "label": "Padding top",
+            "name": "padding_top",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "The value is in pixels (px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": 200,
+            "placeholder": "",
+            "step": "1",
+            "prepend": "",
+            "append": "px"
+        },
+        {
+            "key": "field_645362a070228",
+            "label": "Padding bottom",
+            "name": "padding_bottom",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "The value is in pixels (px).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": 200,
+            "placeholder": "",
+            "step": "1",
+            "prepend": "",
+            "append": "px"
+        },
+        {
             "key": "field_645268e670225",
             "label": "Content",
             "name": "",
@@ -106,5 +168,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771517704
+    "modified": 1771955200
 }

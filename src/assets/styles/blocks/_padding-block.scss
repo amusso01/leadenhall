@@ -1,0 +1,18 @@
+@use "../common/media" as *;
+
+// Reusable block padding: set --padding-pt and --padding-pb in a scoped <style> per block,
+// then add .fdry-block-padding to the block root. Any block can use this.
+.fdry-block-padding {
+  padding-top: var(--padding-pt, 0);
+  padding-bottom: var(--padding-pb, 0);
+
+  @include media("<tablet") {
+    padding-top: calc(var(--padding-pt, 0) * 0.75);
+    padding-bottom: calc(var(--padding-pb, 0) * 0.75);
+  }
+
+  @include media("<phone") {
+    padding-top: calc(var(--padding-pt, 0) * 0.5);
+    padding-bottom: calc(var(--padding-pb, 0) * 0.5);
+  }
+}

@@ -41,7 +41,7 @@ ACF shows **"Sync available"** only when the JSON is considered **newer** than t
 - ACF compares this value to the field group's `post_modified` in the database.
 - If **JSON `modified` > DB `post_modified`**, sync is offered.
 
-**Rule: whenever you change an ACF JSON file, increase `modified`** (e.g. by 1 or set it to a current/future timestamp). Otherwise the UI will not show "Sync available" and the DB will not update from the JSON.
+**Rule: whenever you change an ACF JSON file, set `modified` to a value strictly greater than the actual current date/time.** The timestamp must be 100% greater than "now" (e.g. run `date +%s` in the terminal and use that value, or add 1 to it). If `modified` is less than or equal to the DB's `post_modified`, the UI will not show "Sync available" and the DB will not update from the JSON. Do not guess a date—use the current Unix timestamp (or current + 1) so the JSON is always newer than the database.
 
 ## 3. Other conventions
 
