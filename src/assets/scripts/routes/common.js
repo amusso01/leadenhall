@@ -1,6 +1,8 @@
 import smoothscroll from "smoothscroll-polyfill";
 import hamburger from "../part/hamburger";
 import navigation from "../part/navigation";
+import initCountUp from "../part/countUp";
+
 export default {
 	init() {
 		// JavaScript to be fired on all pages
@@ -13,6 +15,9 @@ export default {
 
 		// Navigation event listener
 		navigation();
+
+		// CountUp: animate numbers when in view (.js-count-up[data-count-end])
+		initCountUp();
 	},
 
 	finalize() {

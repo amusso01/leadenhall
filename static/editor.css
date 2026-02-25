@@ -1,0 +1,6 @@
+/* Editor only: show [data-aos] elements as if already animated (AOS JS does not run in editor) */
+[data-aos],
+[data-aos].aos-animate {
+	opacity: 1 !important;
+	transform: none !important;
+}

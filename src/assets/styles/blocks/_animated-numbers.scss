@@ -1,0 +1,98 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.animated-numbers-block {
+	&--text-white &__title,
+	&--text-white &__subtitle,
+	&--text-white &__item-title {
+		color: $color__soft-white;
+	}
+
+	&--text-dark &__title,
+	&--text-dark &__subtitle,
+	&--text-dark &__item-title {
+		color: $color__text;
+	}
+
+	&__wrapper {
+		display: grid;
+		grid-template-columns: 1fr 450px;
+		column-gap: 80px;
+
+		@include media("<tablet") {
+			grid-template-columns: 1fr;
+			column-gap: 0;
+		}
+	}
+
+	&__title {
+		margin-bottom: 28px;
+	}
+
+	&__subtitle {
+		margin-bottom: 44px;
+		line-height: 26px;
+		font-size: 18px;
+	}
+
+	&__numbers {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 36px;
+
+		@include media("<phone-land") {
+			gap: 15px;
+		}
+
+		@include media("<phone") {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 51px 18px;
+		background-color: $color__darkest-blue;
+		text-align: center;
+
+		@include media("<phone") {
+			padding: 30px 10px;
+		}
+	}
+
+	&__item-title {
+		font-size: 18px;
+		margin-bottom: 28px;
+	}
+
+	&__number {
+		font-size: 56px;
+		font-weight: 600;
+		color: $color__main;
+		font-family: $header__fontname;
+
+		@include media("<phone-land") {
+			font-size: 50px;
+		}
+	}
+
+	&__right {
+		@include media("<tablet") {
+			display: none;
+		}
+	}
+
+	&__image {
+		aspect-ratio: 6 / 10;
+		position: relative;
+		overflow: hidden;
+
+		img {
+			@extend %cover;
+			object-fit: contain;
+		}
+	}
+}

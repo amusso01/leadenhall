@@ -58,49 +58,65 @@ function foundry_gutenblock_animatedNumbersBlock($block, $content = '', $is_prev
   $has_padding = $pt !== null || $pb !== null;
 
   $style = $background ? ' style="background-color: ' . esc_attr($background) . ';"' : '';
-  ?>
-<?php if ($has_padding) : ?>
-  <style>
-    #<?php echo esc_attr($block_id); ?> {
-      <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;<?php endif; ?>
-      <?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;<?php endif; ?>
-    }
-  </style>
-<?php endif; ?>
-  <section id="<?php echo esc_attr($block_id); ?>" class="animated-numbers-block<?php echo $has_padding ? ' fdry-block-padding' : ''; ?>"<?php echo $style; ?>>
+  $text_scheme = $background && function_exists('foundry_contrast_text_from_hex')
+    ? foundry_contrast_text_from_hex($background)
+    : 'dark';
+  $text_class = ' animated-numbers-block--text-' . $text_scheme;
+?>
+  <?php if ($has_padding) : ?>
+    <style>
+      #<?php echo esc_attr($block_id); ?> {
+        <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;
+        <?php endif; ?><?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;
+        <?php endif; ?>
+      }
+    </style>
+  <?php endif; ?>
+  <section id="<?php echo esc_attr($block_id); ?>" class="animated-numbers-block<?php echo $has_padding ? ' fdry-block-padding' : ''; ?><?php echo esc_attr($text_class); ?>" <?php echo $style; ?>>
     <div class="content-block">
       <div class="animated-numbers-block__wrapper">
-      <?php if ($title) : ?>
-        <h2 class="animated-numbers-block__title"><?php echo esc_html($title); ?></h2>
-      <?php endif; ?>
-      <?php if ($subtitle) : ?>
-        <div class="animated-numbers-block__subtitle"><?php echo wp_kses_post(nl2br($subtitle)); ?></div>
-      <?php endif; ?>
-      <?php if ($image && !empty($image['url'])) : ?>
-        <div class="animated-numbers-block__image">
-          <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>" />
-        </div>
-      <?php endif; ?>
-      <?php if ($numbers && is_array($numbers)) : ?>
-        <div class="animated-numbers-block__numbers">
-          <?php foreach ($numbers as $row) : ?>
-            <div class="animated-numbers-block__item">
-              <?php
-                $num = $row['number'] ?? '';
-                $sym = $row['symbol'] ?? 'none';
-                $sym_char = ($sym === 'plus') ? '+' : (($sym === 'percent') ? '%' : '');
-                if ($num !== '' || $sym_char !== '') : ?>
-                <span class="animated-numbers-block__number"><?php echo esc_html($num . $sym_char); ?></span>
-              <?php endif; ?>
-              <?php if (!empty($row['title'])) : ?>
-                <span class="animated-numbers-block__item-title"><?php echo esc_html($row['title']); ?></span>
-              <?php endif; ?>
+        <div class="animated-numbers-block__left">
+          <?php if ($title) : ?>
+            <h2 class="animated-numbers-block__title"><?php echo esc_html($title); ?></h2>
+          <?php endif; ?>
+          <?php if ($subtitle) : ?>
+            <div class="animated-numbers-block__subtitle"><?= $subtitle; ?></div>
+          <?php endif; ?>
+          <?php if ($numbers && is_array($numbers)) : ?>
+            <div class="animated-numbers-block__numbers" role="list">
+              <?php foreach ($numbers as $row) : ?>
+                <div class="animated-numbers-block__item" role="listitem">
+                  <?php if (!empty($row['title'])) : ?>
+                    <span class="animated-numbers-block__item-title"><?php echo esc_html($row['title']); ?></span>
+                  <?php endif; ?>
+                  <?php
+                  $num_raw = $row['number'] ?? '';
+                  $sym = $row['symbol'] ?? 'none';
+                  $sym_char = ($sym === 'plus') ? '+' : (($sym === 'percent') ? '%' : '');
+                  $num_value = is_numeric($num_raw) ? floatval($num_raw) : 0;
+                  $decimals = (is_numeric($num_raw) && strpos((string) $num_raw, '.') !== false) ? 1 : 0;
+                  if ($num_raw !== '' || $sym_char !== '') : ?>
+                    <span
+                      class="animated-numbers-block__number js-count-up"
+                      data-count-end="<?php echo esc_attr($num_value); ?>"
+                      data-count-suffix="<?php echo esc_attr($sym_char); ?>"
+                      data-count-decimals="<?php echo (int) $decimals; ?>"
+                    ><?php echo esc_html($num_raw . $sym_char); ?></span>
+                  <?php endif; ?>
+                </div>
+              <?php endforeach; ?>
             </div>
-          <?php endforeach; ?>
+          <?php endif; ?>
         </div>
-      <?php endif; ?>
+        <?php if ($image && !empty($image['url'])) : ?>
+          <div class="animated-numbers-block__right">
+            <div class="animated-numbers-block__image" data-aos="fade-in" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-duration="600">
+              <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>" />
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </section>
-  <?php
+<?php
 }

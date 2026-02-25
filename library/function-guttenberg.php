@@ -123,6 +123,7 @@ Register back-end CSS editor
 add_theme_support('editor-styles');
 add_editor_style('./dist/styles/root.css');
 add_editor_style('./dist/styles/main.css');
+add_editor_style('./static/editor.css');
 /*==================================================================================
 Register new category in guttenberg block
 ==================================================================================*/
