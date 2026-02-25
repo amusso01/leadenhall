@@ -55,6 +55,31 @@ function acfFile_toSvg($file){
 /––––––––––––––––––––––––*/
 
 
+/* 1.3b Contrast text color from background (hex)
+/––––––––––––––––––––––––*/
+/**
+ * Returns 'white' or 'dark' for text color based on background hex.
+ * Dark background → 'white'; light background → 'dark'.
+ *
+ * @param string $hex Hex color e.g. '#323c4e' or '323c4e'
+ * @return string 'white' or 'dark'
+ */
+function foundry_contrast_text_from_hex($hex) {
+	$hex = ltrim((string) $hex, '#');
+	if (strlen($hex) !== 6 || !ctype_xdigit($hex)) {
+		return 'dark';
+	}
+	$r = hexdec(substr($hex, 0, 2)) / 255;
+	$g = hexdec(substr($hex, 2, 2)) / 255;
+	$b = hexdec(substr($hex, 4, 2)) / 255;
+	$to_linear = function ($c) {
+		return $c <= 0.03928 ? $c / 12.92 : pow(($c + 0.055) / 1.055, 2.4);
+	};
+	$luminance = 0.2126 * $to_linear($r) + 0.7152 * $to_linear($g) + 0.0722 * $to_linear($b);
+	return $luminance < 0.4 ? 'white' : 'dark';
+}
+
+
 /* 1.4 STRING SHORTENER
 /––––––––––––––––––––––––*/
 // shorten strings and append ...

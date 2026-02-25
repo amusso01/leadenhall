@@ -75,21 +75,28 @@ function foundry_gutenblock_iconGridBlock($block, $content = '', $is_preview = f
     <div class="content-block">
       <div class="fd-icon-grid__wrapper">
         <div class="fd-icon-grid__grid columns-<?= $grid_columns; ?>">
-          <?php foreach ($items as $item) : ?>
+          <?php foreach ($items as $key => $item) : ?>
             <?php
             $icon = $item['icon'] ?? null;
             $title = $item['title'] ?? '';
             $link_url = isset($item['link']) && is_string($item['link']) ? trim($item['link']) : '';
             $content = $item['content'] ?? '';
             ?>
-            <div class="fd-icon-grid__item">
+            <div class="fd-icon-grid__item" data-aos="fade-zoom-in" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-duration="500">
+              <?php if ($icon && !empty($icon['ID'])) : ?>
+                <?php
+                $icon_path = get_attached_file($icon['ID']);
+                $svg_content = $icon_path ? acfFile_toSvg($icon_path) : '';
+                ?>
+                <?php if ($svg_content) : ?>
+                  <div class="fd-icon-grid__icon" aria-hidden="true">
+                    <?php echo $svg_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inline SVG from uploads 
+                    ?>
+                  </div>
+                <?php endif; ?>
+              <?php endif; ?>
               <?php if ($title) : ?>
                 <h5 class="fd-icon-grid__title"><?= esc_html($title); ?></h5>
-              <?php endif; ?>
-              <?php if ($icon && !empty($icon['url'])) : ?>
-                <div class="fd-icon-grid__icon">
-                  <img src="<?= esc_url($icon['url']); ?>" alt="<?= esc_attr($icon['alt'] ?? $title); ?>" loading="lazy" />
-                </div>
               <?php endif; ?>
               <?php if ($content) : ?>
                 <div class="fd-icon-grid__content"><?= nl2br(esc_html($content)); ?></div>

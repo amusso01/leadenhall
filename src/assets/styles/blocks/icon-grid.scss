@@ -1,0 +1,93 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.fd-icon-grid {
+	.fd-icon-grid__grid {
+		display: grid;
+		column-gap: 100px;
+		row-gap: 80px;
+		justify-items: center;
+
+		@include media("<phone-land") {
+			column-gap: 50px;
+		}
+
+		@include media("<phone") {
+			column-gap: 25px;
+			row-gap: 40px;
+		}
+
+		&.columns-3 {
+			grid-template-columns: repeat(3, 1fr);
+
+			@include media("<phone-land") {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.columns-4 {
+			grid-template-columns: repeat(4, 1fr);
+
+			@include media("<phone-land") {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	&__icon {
+		width: 102px;
+		height: 102px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto;
+		margin-bottom: 32px;
+		background-color: $color__main;
+		border-radius: 50%;
+
+		@include media("<phone") {
+			margin-bottom: 25px;
+			width: 80px;
+			height: 80px;
+
+			svg {
+				width: 45px;
+				height: auto;
+			}
+		}
+	}
+
+	&__title {
+		font-family: $text__fontname;
+		font-size: 26px;
+		font-weight: 500;
+
+		@include media("<phone") {
+			font-size: 21px;
+		}
+	}
+
+	&__content {
+		margin-top: 32px;
+
+		@include media("<phone") {
+			margin-top: 25px;
+		}
+	}
+
+	&__link {
+		display: inline-block;
+		margin-top: auto;
+		padding-top: 32px;
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-decoration: underline;
+	}
+}

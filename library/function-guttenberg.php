@@ -106,6 +106,7 @@ function fdry_block_wrapper($block_content, $block)
 		'core/separator'  => 'wp-block-separator  content-block',
 		'core/list'       => 'wp-block-list  content-block',
 		'core/embed'      => 'wp-block-embed__wrapper content-block',
+		'core/group'      => 'wp-block-group fd-narrow-width',
 	);
 
 	if (!empty($wrappers[$block_name])) {
@@ -151,6 +152,7 @@ require get_template_directory() . '/components/blocks/global-map-block.php';
 require get_template_directory() . '/components/blocks/image-text-grid-block.php';
 require get_template_directory() . '/components/blocks/cards-grid-block.php';
 require get_template_directory() . '/components/blocks/icon-grid-block.php';
+require get_template_directory() . '/components/blocks/wysiwyg-block.php';
 require get_template_directory() . '/components/blocks/history-slider-block.php';
 require get_template_directory() . '/components/blocks/testimonial-block.php';
 require get_template_directory() . '/components/blocks/marquee-block.php';

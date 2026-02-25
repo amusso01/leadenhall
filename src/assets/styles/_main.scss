@@ -1,15 +1,13 @@
 //Custom styles start here
 
-// Vendors
-
-// Common
+// Common (all @use must come first in Sass)
 @use "common/reset";
 @use "common/variables";
-// Import sassflexbox http://sassflexboxgrid.com/views/documentation.html
 @use "common/wp-core";
 @use "common/mixin";
 @use "common/general";
 @use "common/helper";
+@use "common/padding-block";
 
 // Components
 @use "components/hamburger";
@@ -18,9 +16,11 @@
 @use "components/nav";
 @use "components/footer";
 
-// block
+// Blocks
 @use "blocks/hero";
-@use "blocks/padding-block";
+@use "blocks/icon-grid";
+@use "blocks/cards-grid";
+@use "blocks/wysiwyg-block";
 // @use "blocks/content-block";
 // @use "blocks/image-block";
 // @use "blocks/image-text-block";
@@ -28,5 +28,8 @@
 // @use "blocks/video-block";
 // @use "blocks/cta-block";
 // @use "blocks/form-block";
+
+// Vendors (after @use — AOS from node_modules)
+@import "~aos/dist/aos.css";
 
 // Templates

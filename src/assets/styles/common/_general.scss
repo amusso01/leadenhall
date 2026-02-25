@@ -2,6 +2,7 @@
   GENERAL
 ==================================================================================*/
 @use "variables" as *;
+@use "media" as *;
 
 html {
 	color: $color__text;
@@ -118,4 +119,34 @@ h5,
 h6,
 .h6 {
 	font-size: $text__h6;
+}
+
+/*
+ * Headings: 25% smaller below phone breakpoint
+ */
+@include media("<phone") {
+	h1,
+	.h1 {
+		font-size: calc(var(--text-h1) * 0.75);
+	}
+	h2,
+	.h2 {
+		font-size: calc(var(--text-h2) * 0.75);
+	}
+	h3,
+	.h3 {
+		font-size: calc(var(--text-h3) * 0.75);
+	}
+	h4,
+	.h4 {
+		font-size: calc(var(--text-h4) * 0.75);
+	}
+	h5,
+	.h5 {
+		font-size: calc(var(--text-h5) * 0.75);
+	}
+	h6,
+	.h6 {
+		font-size: calc(var(--text-h6) * 0.75);
+	}
 }
