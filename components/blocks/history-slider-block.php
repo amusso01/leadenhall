@@ -72,16 +72,24 @@ function foundry_gutenblock_historySliderBlock($block, $content = '', $is_previe
           <h2 class="fd-history-slider-block__title"><?php echo esc_html($title); ?></h2>
         <?php endif; ?>
       </div>
-      <?php if (!empty($slides) && is_array($slides)) : ?>
-        <div class="swiper fd-history-slider-block__slider">
-          <div class="swiper-wrapper">
-            <?php foreach ($slides as $slide) : ?>
-              <?php
-              $year    = $slide['year'] ?? '';
-              $image   = $slide['image'] ?? null;
-              $content = $slide['content'] ?? '';
-              ?>
-              <div class="swiper-slide">
+    </div>
+    <?php if (!empty($slides) && is_array($slides)) : ?>
+      <div class="swiper fd-history-slider-block__slider">
+        <div class="swiper-wrapper">
+          <?php foreach ($slides as $slide) : ?>
+            <?php
+            $year    = $slide['year'] ?? '';
+            $image   = $slide['image'] ?? null;
+            $content = $slide['content'] ?? '';
+            ?>
+            <div class="swiper-slide">
+              <div class="fd-history-slider-block__slide-top">
+                <p class="fd-history-slider-block__slide-top-year"><?php echo esc_html($year); ?></p>
+                <span class="fd-history-slider-block__dot"></span>
+              </div>
+              <div class="fd-history-slider-block__slide-line fd-history-slider-block__slide-line--left"></div>
+              <div class="fd-history-slider-block__slide-line fd-history-slider-block__slide-line--right"></div>
+              <div class="fd-history-slider-block__slide-inner">
                 <?php if ($year) : ?>
                   <div class="fd-history-slider-block__year"><?php echo esc_html($year); ?></div>
                 <?php endif; ?>
@@ -94,11 +102,12 @@ function foundry_gutenblock_historySliderBlock($block, $content = '', $is_previe
                   <div class="fd-history-slider-block__content"><?php echo nl2br(esc_html($content)); ?></div>
                 <?php endif; ?>
               </div>
-            <?php endforeach; ?>
-          </div>
+            </div>
+          <?php endforeach; ?>
         </div>
-      <?php endif; ?>
-    </div>
+      </div>
+    <?php endif; ?>
+
 
   </section>
 <?php

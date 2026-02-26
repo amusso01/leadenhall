@@ -82,7 +82,7 @@ function foundry_gutenblock_iconGridBlock($block, $content = '', $is_preview = f
             $link_url = isset($item['link']) && is_string($item['link']) ? trim($item['link']) : '';
             $content = $item['content'] ?? '';
             ?>
-            <div class="fd-icon-grid__item" data-aos="fade-zoom-in" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-duration="500">
+            <div class="fd-icon-grid__item" data-aos="fade-zoom-in" data-aos-offset="50" data-aos-easing="ease-in-sine" data-aos-duration="500">
               <?php if ($icon && !empty($icon['ID'])) : ?>
                 <?php
                 $icon_path = get_attached_file($icon['ID']);
