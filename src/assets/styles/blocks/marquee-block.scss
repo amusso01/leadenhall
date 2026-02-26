@@ -1,0 +1,51 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.fd-marquee-block {
+	&__wrapper {
+		overflow: hidden;
+		max-width: 1920px;
+		margin: 0 auto;
+	}
+
+	&__slider {
+		/* Smooth continuous scroll for autoplay */
+		.swiper-wrapper {
+			transition-timing-function: linear !important;
+			pointer-events: none;
+		}
+	}
+
+	&__slide {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+
+	&__logo {
+		display: block;
+		width: auto;
+		max-width: 140px;
+		max-height: 48px;
+		object-fit: contain;
+		user-select: none;
+		pointer-events: none;
+		
+
+		@include media(">=tablet") {
+			max-width: 160px;
+			max-height: 56px;
+		}
+		@include media(">=desktop") {
+			max-width: 180px;
+			max-height: 64px;
+		}
+	}
+
+	/* Swiper needs slide width when slidesPerView: auto */
+	.swiper-slide {
+		width: auto;
+		flex-shrink: 0;
+	}
+}

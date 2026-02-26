@@ -82,6 +82,7 @@ function foundry_gutenblock_testimonialBlock($block, $content = '', $is_preview 
               <div class="swiper-wrapper">
                 <?php foreach ($slides as $slide) : ?>
                   <?php $testimonial = $slide['testimonial'] ?? ''; ?>
+                  <?php $author = $slide['author'] ?? ''; ?>
                   <div class="swiper-slide">
                     <div class="fd-testimonial-block__slide">
                       <?php if ($testimonial) : ?>
@@ -89,6 +90,10 @@ function foundry_gutenblock_testimonialBlock($block, $content = '', $is_preview 
                           <span class="fd-testimonial-block__quote fd-testimonial-block__quote--start">&ldquo;</span>
                           <?php echo nl2br($testimonial); ?>
                         </div>
+                      <?php endif; ?>
+
+                      <?php if ($author) : ?>
+                        <div class="fd-testimonial-block__author"><?= $author ?></div>
                       <?php endif; ?>
                     </div>
                   </div>

@@ -1,0 +1,203 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.fd-teams-block {
+	padding-top: 36px;
+	padding-bottom: 126px;
+
+	@include media("<phone") {
+		padding-top: 25px;
+		padding-bottom: 75px;
+	}
+
+	// Filters
+	&__filters {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 44px;
+		gap: 20px;
+
+		@include media("<phone-land") {
+			flex-direction: column;
+			gap: 16px;
+		}
+	}
+
+	&__filter-sector {
+		position: relative;
+	}
+
+	&__sector-toggle {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-family: $text__fontname, sans-serif;
+		font-size: 16px;
+		padding: 10px 0;
+		font-weight: 500;
+
+		svg {
+			transition: transform 0.3s ease;
+		}
+
+		&[aria-expanded="true"] svg {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__sector-dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: #fff;
+		min-width: 220px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
+		z-index: 10;
+		display: none;
+		flex-direction: column;
+		padding: 8px 0;
+
+		&--open {
+			display: flex;
+		}
+	}
+
+	&__sector-option {
+		background: none;
+		border: none;
+		padding: 10px 20px;
+		text-align: left;
+		cursor: pointer;
+		font-family: $text__fontname, sans-serif;
+		font-size: 14px;
+		color: $color__text;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: $color__grey;
+		}
+
+		&--active {
+			font-weight: 600;
+			color: $color__main;
+		}
+	}
+
+	// Search input
+	&__filter-search {
+		position: relative;
+		display: flex;
+		align-items: center;
+
+		@include media("<phone-land") {
+			width: 100%;
+		}
+	}
+
+	&__search-input {
+		border: none;
+		border-bottom: 1px solid $color__grey;
+		background: none;
+		padding: 10px 30px 10px 0;
+		font-family: $text__fontname, sans-serif;
+		font-size: 16px;
+		color: $color__text;
+		width: 200px;
+		outline: none;
+
+		&::placeholder {
+			opacity: 0.7;
+		}
+
+		&:focus {
+			border-bottom-color: $color__text;
+		}
+
+		@include media("<phone-land") {
+			width: 100%;
+		}
+	}
+
+	&__search-icon {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		pointer-events: none;
+	}
+
+	// Grid
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 84px 53px;
+
+		@include media("<desktop") {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@include media("<phone-land") {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 30px 20px;
+		}
+
+		@include media("<phone") {
+			gap: 24px 16px;
+		}
+	}
+
+	// Card
+	&__card {
+		transition: opacity 0.3s ease;
+
+		&--hidden {
+			display: none;
+		}
+	}
+
+	&__card-image {
+		aspect-ratio: 3 / 3.5;
+		overflow: hidden;
+		margin-bottom: 18px;
+		background-color: $color__grey;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+
+	&__card-name {
+		font-family: $text__fontname, sans-serif;
+		font-size: 20px;
+		font-weight: 700;
+		margin: 0 0 8px;
+
+		@include media("<phone") {
+			font-size: 16px;
+		}
+	}
+
+	&__card-role {
+		font-family: $text__fontname, sans-serif;
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin: 0;
+	}
+
+	// No results
+	&__no-results {
+		text-align: center;
+		font-family: $text__fontname, sans-serif;
+		font-size: 23px;
+		font-weight: 500;
+		padding: 40px 0;
+	}
+}

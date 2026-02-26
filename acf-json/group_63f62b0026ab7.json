@@ -38,7 +38,7 @@
             "min": 0,
             "max": 200,
             "placeholder": "",
-            "step": "1",
+            "step": 1,
             "prepend": "",
             "append": "px"
         },
@@ -60,7 +60,7 @@
             "min": 0,
             "max": 200,
             "placeholder": "",
-            "step": "1",
+            "step": 1,
             "prepend": "",
             "append": "px"
         },
@@ -81,7 +81,11 @@
             "default_value": "#50617A",
             "enable_transparency": 0,
             "return_format": "string",
-            "allow_in_bindings": 0
+            "allow_in_bindings": 0,
+            "enable_opacity": false,
+            "custom_palette_source": "",
+            "palette_colors": "",
+            "show_color_wheel": true
         },
         {
             "key": "field_63f62b2862ab8",
@@ -169,6 +173,28 @@
                     "placeholder": "",
                     "new_lines": "br",
                     "parent_repeater": "field_63f62b_test_slides"
+                },
+                {
+                    "key": "field_69a0b41fc91ef",
+                    "label": "Author",
+                    "name": "author",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_63f62b_test_slides"
                 }
             ]
         }
@@ -178,7 +204,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf/fd-testimonial-block"
+                "value": "acf\/fd-testimonial-block"
             }
         ]
     ],
@@ -192,5 +218,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772125385
+    "modified": 1772139560
 }

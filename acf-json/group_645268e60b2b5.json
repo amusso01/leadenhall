@@ -38,7 +38,7 @@
             "min": 0,
             "max": 200,
             "placeholder": "",
-            "step": "1",
+            "step": 1,
             "prepend": "",
             "append": "px"
         },
@@ -60,7 +60,7 @@
             "min": 0,
             "max": 200,
             "placeholder": "",
-            "step": "1",
+            "step": 1,
             "prepend": "",
             "append": "px"
         },
@@ -141,9 +141,10 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
                     "rows": "",
                     "placeholder": "",
-                    "new_lines": "",
+                    "new_lines": "br",
                     "parent_repeater": "field_645360ec6a78f"
                 }
             ]
@@ -154,7 +155,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf/fd-accordion-block"
+                "value": "acf\/fd-accordion-block"
             }
         ]
     ],
@@ -168,5 +169,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771955200
+    "modified": 1772136751
 }

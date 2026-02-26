@@ -1,0 +1,139 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.fd-contact-block {
+	padding-top: 100px;
+	padding-bottom: 100px;
+
+	@include media("<phone") {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	&__wrapper {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
+	&__heading {
+		margin: 0 0 40px;
+		font-family: $header__fontname;
+		font-size: 32px;
+		font-weight: 400;
+		color: $color__text;
+		text-align: center;
+
+		@include media("<phone") {
+			font-size: 28px;
+			margin-bottom: 32px;
+		}
+	}
+
+	&__row {
+		margin-bottom: 28px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&--two-cols {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 24px;
+
+			@include media("<tablet") {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		&--submit {
+			margin-top: 40px;
+			text-align: center;
+		}
+	}
+
+	&__field {
+		display: block;
+	}
+
+	&__label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	&__hint {
+		display: block;
+		margin-top: 6px;
+		font-family: $text__fontname;
+		font-size: 14px;
+		color: rgba($color__text, 0.6);
+	}
+
+	&__input,
+	&__textarea {
+		width: 100%;
+		padding: 14px 16px;
+		font-family: $text__fontname;
+		font-size: 16px;
+		line-height: 1.5;
+		color: $color__text;
+		background-color: $color__bright;
+		border: 1px solid rgba($color__dark, 0.15);
+		border-radius: 4px;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+
+		&::placeholder {
+			color: rgba($color__text, 0.5);
+		}
+
+		&:focus {
+			outline: none;
+			border-color: $color__main;
+			box-shadow: 0 0 0 2px rgba($color__main, 0.15);
+		}
+
+		.wpcf7-not-valid & {
+			border-color: #c00;
+		}
+	}
+
+	&__textarea {
+		min-height: 140px;
+		resize: vertical;
+	}
+
+	&__submit {
+		min-height: $button__height;
+		padding: 0 48px;
+		font-family: $text__fontname;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: $color__bright;
+		background-color: $button__color;
+		border: none;
+		border-radius: $button__radius;
+		cursor: pointer;
+		transition:
+			background-color 0.2s ease,
+			color 0.2s ease;
+
+		&:hover {
+			background-color: $color__text;
+		}
+	}
+
+	.fd-contact-block__row--submit {
+		text-align: left;
+	}
+}

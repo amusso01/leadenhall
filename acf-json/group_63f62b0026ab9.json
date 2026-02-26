@@ -11,14 +11,23 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
+            "wrapper": { "width": "", "class": "", "id": "" },
             "placement": "left",
             "endpoint": 0,
             "selected": 0
+        },
+        {
+            "key": "field_marquee_bg_color",
+            "label": "Background colour",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Defaults to darkest blue if empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "default_value": "",
+            "enable_transparency": 0
         },
         {
             "key": "field_63f62b0026fd62",
@@ -29,7 +38,7 @@
             "instructions": "The value is in pixels (px).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
+            "wrapper": { "width": "50", "class": "", "id": "" },
             "default_value": "",
             "min": 0,
             "max": 200,
@@ -47,7 +56,7 @@
             "instructions": "The value is in pixels (px).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
+            "wrapper": { "width": "50", "class": "", "id": "" },
             "default_value": "",
             "min": 0,
             "max": 200,
@@ -65,14 +74,51 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
+            "wrapper": { "width": "", "class": "", "id": "" },
             "placement": "left",
             "endpoint": 0,
             "selected": 0
+        },
+        {
+            "key": "field_marquee_logos",
+            "label": "Logos",
+            "name": "logos",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add logo",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_marquee_logo_file",
+                    "label": "Logo",
+                    "name": "logo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium"
+                }
+            ]
         }
     ],
     "location": [
@@ -94,5 +140,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771955200
+    "modified": 1772127429
 }

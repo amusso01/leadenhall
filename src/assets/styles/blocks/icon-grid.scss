@@ -51,6 +51,11 @@
 		background-color: $color__main;
 		border-radius: 50%;
 
+		svg {
+			width: 53px;
+			height: auto;
+		}
+
 		@include media("<phone") {
 			margin-bottom: 25px;
 			width: 80px;

@@ -82,10 +82,13 @@ function foundry_gutenblock_imageTextGridBlock($block, $content = '', $is_previe
               $item_content = $item['content'] ?? '';
               $button_url = $item['button_url'] ?? '';
               $button_label = $item['button_label'] ?? '';
+              $show_infobox = !empty($item['show_infobox']);
+              $infobox_text = $item['infobox_text'] ?? '';
+              $infobox_number = $item['infobox_number'] ?? '';
             ?>
               <div class="fd-image-text-grid__item">
                 <?php if (!empty($img) && is_array($img)) : ?>
-                  <div class="fd-image-text-grid__media">
+                  <div class="fd-image-text-grid__media" data-aos="zoom-in" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-duration="600">
                     <img src="<?php echo esc_url($img['url'] ?? ''); ?>" alt="<?php echo esc_attr($img['alt'] ?? ''); ?>" />
                   </div>
                 <?php endif; ?>
@@ -98,6 +101,16 @@ function foundry_gutenblock_imageTextGridBlock($block, $content = '', $is_previe
                   <?php endif; ?>
                   <?php if ($button_url && $button_label) : ?>
                     <a href="<?php echo esc_url($button_url); ?>" class="btn"><?php echo esc_html($button_label); ?></a>
+                  <?php endif; ?>
+                  <?php if ($show_infobox && ($infobox_text !== '' || $infobox_number !== '')) : ?>
+                    <div class="fd-image-text-grid__infobox" data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-duration="600">
+                      <?php if ($infobox_text !== '') : ?>
+                        <p class="fd-image-text-grid__infobox-text"><?php echo esc_html($infobox_text); ?></p>
+                      <?php endif; ?>
+                      <?php if ($infobox_number !== '') : ?>
+                        <p class="fd-image-text-grid__infobox-number"><?php echo esc_html($infobox_number); ?></p>
+                      <?php endif; ?>
+                    </div>
                   <?php endif; ?>
                 </div>
               </div>

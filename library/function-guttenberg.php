@@ -157,6 +157,7 @@ require get_template_directory() . '/components/blocks/wysiwyg-block.php';
 require get_template_directory() . '/components/blocks/history-slider-block.php';
 require get_template_directory() . '/components/blocks/testimonial-block.php';
 require get_template_directory() . '/components/blocks/marquee-block.php';
+require get_template_directory() . '/components/blocks/teams-block.php';
 
 
 /**

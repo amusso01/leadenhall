@@ -1,0 +1,77 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.accordion-block {
+	&__inner {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.accordion-container {
+		.ac {
+			border-top: 1px solid rgba($color__dark, 0.15);
+
+			&:last-child {
+				border-bottom: 1px solid rgba($color__dark, 0.15);
+			}
+		}
+
+		.ac-header {
+			margin: 0;
+		}
+
+		.ac-trigger {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			padding: 24px 0;
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-family: $header__fontname;
+			font-size: 24px;
+			color: $color__text;
+			text-align: left;
+			@include media("<phone") {
+				font-size: 21px;
+				padding: 20px 0;
+			}
+
+			&::after {
+				content: "";
+				display: block;
+				width: 20px;
+				height: 20px;
+				flex-shrink: 0;
+				margin-left: 24px;
+				background: currentColor;
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cline x1='4' y1='10' x2='16' y2='10' stroke='%23000' stroke-width='1.5'/%3E%3Cline x1='10' y1='4' x2='10' y2='16' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+				mask-size: contain;
+				mask-repeat: no-repeat;
+				transition: mask-image 0.2s ease;
+			}
+		}
+
+		.ac.is-active .ac-trigger::after {
+			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cline x1='4' y1='10' x2='16' y2='10' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+		}
+
+		.ac-panel {
+			overflow: hidden;
+			transition: height 0.3s ease;
+		}
+
+		.ac-text {
+			padding: 0 0 32px;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 26px;
+			color: $color__text;
+
+			@include media("<phone") {
+				padding-bottom: 24px;
+			}
+		}
+	}
+}
