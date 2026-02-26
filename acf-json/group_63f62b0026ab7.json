@@ -29,7 +29,11 @@
             "instructions": "The value is in pixels (px).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "min": 0,
             "max": 200,
@@ -47,7 +51,11 @@
             "instructions": "The value is in pixels (px).",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {"width": "50", "class": "", "id": ""},
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "min": 0,
             "max": 200,
@@ -55,6 +63,25 @@
             "step": "1",
             "prepend": "",
             "append": "px"
+        },
+        {
+            "key": "field_63f62b_test_bg",
+            "label": "Background Color",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#50617A",
+            "enable_transparency": 0,
+            "return_format": "string",
+            "allow_in_bindings": 0
         },
         {
             "key": "field_63f62b2862ab8",
@@ -73,6 +100,77 @@
             "placement": "left",
             "endpoint": 0,
             "selected": 0
+        },
+        {
+            "key": "field_63f62b_test_img",
+            "label": "Image",
+            "name": "image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Fixed image shown on the right.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_63f62b_test_slides",
+            "label": "Slides",
+            "name": "slides",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_63f62b_test_text",
+            "button_label": "Add slide",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_63f62b_test_text",
+                    "label": "Testimonial",
+                    "name": "testimonial",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "new_lines": "br",
+                    "parent_repeater": "field_63f62b_test_slides"
+                }
+            ]
         }
     ],
     "location": [
@@ -94,5 +192,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771955200
+    "modified": 1772125385
 }

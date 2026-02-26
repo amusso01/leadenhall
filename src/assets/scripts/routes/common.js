@@ -6,6 +6,7 @@ import { COUNT_UP_SELECTOR, initCountUpElement } from "../part/countUp";
 import { GLOBAL_MAP_BLOCK_SELECTOR, initGlobalMapHitAreasForBlock } from "../part/globalMapHitArea";
 import { HISTORY_SLIDER_SELECTOR, initHistorySlider } from "../part/historySlider";
 import { TEAM_SLIDER_SELECTOR, initTeamSlider } from "../part/teamSlider";
+import { TESTIMONIAL_SLIDER_SELECTOR, initTestimonialSlider } from "../part/testimonialSlider";
 
 export default {
 	init() {
@@ -36,6 +37,11 @@ export default {
 		// Team slider: run only when block is on the page
 		document.arrive(TEAM_SLIDER_SELECTOR, { existing: true }, (el) => {
 			initTeamSlider(el);
+		});
+
+		// Testimonial block slider: run only when block is on the page
+		document.arrive(TESTIMONIAL_SLIDER_SELECTOR, { existing: true }, (el) => {
+			initTestimonialSlider(el);
 		});
 	},
 
