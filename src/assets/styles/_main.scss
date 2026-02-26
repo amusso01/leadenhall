@@ -33,8 +33,9 @@
 // @use "blocks/cta-block";
 // @use "blocks/form-block";
 
+// Templates
+@use "templates/taxonomy-sectors";
+
 // Vendors (after @use — AOS from node_modules)
 @import "~aos/dist/aos.css";
 @import "~swiper/swiper.css";
-
-// Templates

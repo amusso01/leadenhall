@@ -12,10 +12,11 @@
 $banner_height = '75'; // in vh
 
 // CONTENT
+$term = get_queried_object();
 
-$hero_image = get_field('hero_image');
+$hero_image = get_field('hero_image', $term);
 
-$tagline = get_field('tagline');
+$tagline = get_field('tagline', $term);
 
 ?>
 

@@ -1,0 +1,84 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.sectors-main {
+	.fd-wysiwyg-block {
+		margin-top: 86px;
+		margin-bottom: 86px;
+	}
+}
+
+.sectors-subsectors {
+	padding-top: 70px;
+	padding-bottom: 70px;
+	background-color: #323c4e;
+
+	&__title {
+		font-family: $header__fontname;
+		color: $color__main;
+		margin-bottom: 36px;
+
+		@include media("<phone-land") {
+			margin-bottom: 24px;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 36px;
+
+		@include media("<tablet") {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include media("<phone-land") {
+			gap: 12px;
+		}
+	}
+
+	&__item {
+		background-color: $color__darkest-blue;
+		padding: 37px 52px;
+		min-height: 196px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		@include media("<phone-land") {
+			padding: 25px 22px;
+			min-height: unset;
+		}
+	}
+
+	&__icon {
+		margin-bottom: 28px;
+
+		@include media("<phone-land") {
+			margin-bottom: 10px;
+		}
+
+		svg {
+			width: 62px;
+			height: auto;
+
+			@include media("<phone-land") {
+				width: 32px;
+				height: auto;
+			}
+		}
+	}
+
+	&__item-title {
+		font-family: $header__fontname;
+		color: $color__soft-white;
+		font-size: 26px;
+		font-weight: 500;
+		line-height: 1;
+		margin: 0;
+
+		@include media("<phone-land") {
+			font-size: 18px;
+		}
+	}
+}

@@ -19,7 +19,7 @@ export function initHistorySlider(el) {
 		spaceBetween: 24,
 		centeredSlides: false,
 		grabCursor: true,
-		speed: 25000,
+		speed: 28000,
 		autoplay: {
 			delay: 1,
 			disableOnInteraction: false,
@@ -41,7 +41,7 @@ export function initHistorySlider(el) {
 		},
 	});
 
-	var AUTOPLAY_SPEED = 25000;
+	var AUTOPLAY_SPEED = 28000;
 	var DRAG_SPEED = 150;
 
 	// Reverse autoplay direction when reaching first/last slide
