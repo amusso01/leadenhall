@@ -56,51 +56,56 @@ function foundry_gutenblock_imageTextGridBlock($block, $content = '', $is_previe
   $has_padding = $pt !== null || $pb !== null;
 
   $image_left_class = $image_left ? 'image-left' : 'image-right';
-  $style = $background_color ? sprintf(' style="background-color: %s;"', esc_attr($background_color)) : '';
-  ?>
-<?php if ($has_padding) : ?>
-  <style>
-    #<?php echo esc_attr($block_id); ?> {
-      <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;<?php endif; ?>
-      <?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;<?php endif; ?>
-    }
-  </style>
-<?php endif; ?>
-  <section id="<?php echo esc_attr($block_id); ?>" class="fd-image-text-grid-block <?php echo esc_attr($image_left_class); ?><?php echo $has_padding ? ' fdry-block-padding' : ''; ?>"<?php echo $style; ?>>
+  $block_style = $background_color ? sprintf(' style="background-color: %s;"', esc_attr($background_color)) : '';
+  $text_scheme = $background_color && function_exists('foundry_contrast_text_from_hex')
+    ? foundry_contrast_text_from_hex($background_color)
+    : 'dark';
+  $text_class = ' fd-image-text-grid-block--text-' . $text_scheme;
+?>
+  <?php if ($has_padding) : ?>
+    <style>
+      #<?php echo esc_attr($block_id); ?> {
+        <?php if ($pt !== null) : ?>--padding-pt: <?php echo (int) $pt; ?>px;
+        <?php endif; ?><?php if ($pb !== null) : ?>--padding-pb: <?php echo (int) $pb; ?>px;
+        <?php endif; ?>
+      }
+    </style>
+  <?php endif; ?>
+  <section id="<?php echo esc_attr($block_id); ?>" class="fd-image-text-grid-block <?php echo esc_attr($image_left_class); ?><?php echo $has_padding ? ' fdry-block-padding' : ''; ?><?php echo esc_attr($text_class); ?>" <?php echo $block_style; ?>>
     <div class="content-block">
       <div class="fd-image-text-grid-block__wrapper">
-    <?php if (!empty($items) && is_array($items)) : ?>
-      <div class="fd-image-text-grid__items">
-        <?php foreach ($items as $item) :
-          $img = $item['image'] ?? null;
-          $title = $item['title'] ?? '';
-          $item_content = $item['content'] ?? '';
-          $button_url = $item['button_url'] ?? '';
-          $button_label = $item['button_label'] ?? '';
-        ?>
-          <div class="fd-image-text-grid__item">
-            <?php if (!empty($img) && is_array($img)) : ?>
-              <div class="fd-image-text-grid__media">
-                <img src="<?php echo esc_url($img['url'] ?? ''); ?>" alt="<?php echo esc_attr($img['alt'] ?? ''); ?>" />
+        <?php if (!empty($items) && is_array($items)) : ?>
+          <div class="fd-image-text-grid__items">
+            <?php foreach ($items as $item) :
+              $img = $item['image'] ?? null;
+              $title = $item['title'] ?? '';
+              $item_content = $item['content'] ?? '';
+              $button_url = $item['button_url'] ?? '';
+              $button_label = $item['button_label'] ?? '';
+            ?>
+              <div class="fd-image-text-grid__item">
+                <?php if (!empty($img) && is_array($img)) : ?>
+                  <div class="fd-image-text-grid__media">
+                    <img src="<?php echo esc_url($img['url'] ?? ''); ?>" alt="<?php echo esc_attr($img['alt'] ?? ''); ?>" />
+                  </div>
+                <?php endif; ?>
+                <div class="fd-image-text-grid__body">
+                  <?php if ($title) : ?>
+                    <h2 class="fd-image-text-grid__title"><?php echo esc_html($title); ?></h2>
+                  <?php endif; ?>
+                  <?php if ($item_content) : ?>
+                    <div class="fd-image-text-grid__content"><?php echo wp_kses_post($item_content); ?></div>
+                  <?php endif; ?>
+                  <?php if ($button_url && $button_label) : ?>
+                    <a href="<?php echo esc_url($button_url); ?>" class="btn"><?php echo esc_html($button_label); ?></a>
+                  <?php endif; ?>
+                </div>
               </div>
-            <?php endif; ?>
-            <div class="fd-image-text-grid__body">
-              <?php if ($title) : ?>
-                <h3 class="fd-image-text-grid__title"><?php echo esc_html($title); ?></h3>
-              <?php endif; ?>
-              <?php if ($item_content) : ?>
-                <div class="fd-image-text-grid__content"><?php echo wp_kses_post($item_content); ?></div>
-              <?php endif; ?>
-              <?php if ($button_url && $button_label) : ?>
-                <a href="<?php echo esc_url($button_url); ?>" class="fd-image-text-grid__button"><?php echo esc_html($button_label); ?></a>
-              <?php endif; ?>
-            </div>
+            <?php endforeach; ?>
           </div>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
+        <?php endif; ?>
       </div>
     </div>
   </section>
-  <?php
+<?php
 }

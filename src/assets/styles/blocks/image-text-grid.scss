@@ -1,0 +1,109 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+.fd-image-text-grid-block {
+	&--text-white .fd-image-text-grid__title,
+	&--text-white .fd-image-text-grid__content,
+	&--text-white .fd-image-text-grid__button {
+		color: $color__soft-white;
+	}
+
+	&--text-dark .fd-image-text-grid__title,
+	&--text-dark .fd-image-text-grid__content,
+	&--text-dark .fd-image-text-grid__button {
+		color: $color__text;
+	}
+
+	// Wrapper: stacked vertically (one item on top of the other), not a grid
+	.fd-image-text-grid__items {
+		display: flex;
+		flex-direction: column;
+		gap: 142px;
+
+		@include media("<phone-land") {
+			gap: 80px;
+		}
+
+		@include media("<phone") {
+			gap: 60px;
+		}
+	}
+
+	// Each item is a grid: image on one side, content on the other. Alternating by index.
+	.fd-image-text-grid__item {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 80px;
+		align-items: center;
+
+		@include media("<phone-land") {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// image_left = first item has image on left → odd items image left, even items image right
+	&.image-left
+		.fd-image-text-grid__item:nth-child(odd)
+		.fd-image-text-grid__media {
+		order: 0;
+	}
+	&.image-left
+		.fd-image-text-grid__item:nth-child(odd)
+		.fd-image-text-grid__body {
+		order: 1;
+	}
+	&.image-left
+		.fd-image-text-grid__item:nth-child(even)
+		.fd-image-text-grid__media {
+		order: 1;
+	}
+	&.image-left
+		.fd-image-text-grid__item:nth-child(even)
+		.fd-image-text-grid__body {
+		order: 0;
+	}
+
+	// image_right = first item has image on right → odd items image right, even items image left
+	&.image-right
+		.fd-image-text-grid__item:nth-child(odd)
+		.fd-image-text-grid__media {
+		order: 1;
+	}
+	&.image-right
+		.fd-image-text-grid__item:nth-child(odd)
+		.fd-image-text-grid__body {
+		order: 0;
+	}
+	&.image-right
+		.fd-image-text-grid__item:nth-child(even)
+		.fd-image-text-grid__media {
+		order: 0;
+	}
+	&.image-right
+		.fd-image-text-grid__item:nth-child(even)
+		.fd-image-text-grid__body {
+		order: 1;
+	}
+
+	.fd-image-text-grid__media {
+		position: relative;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.fd-image-text-grid__title {
+		margin-bottom: 34px;
+	}
+
+	.fd-image-text-grid__content {
+		line-height: 26px;
+	}
+
+	.btn {
+		margin-top: 44px;
+	}
+}
