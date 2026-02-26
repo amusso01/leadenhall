@@ -1,0 +1,162 @@
+@use "../common/variables" as *;
+@use "../common/media" as *;
+
+// Pulsating outer glow rings (scale 0.8 → 1.15; few keyframes = smooth easing)
+@keyframes fd-global-map-dot-pulse {
+	0%,
+	100% {
+		transform: scale(0.8);
+		opacity: 0.4;
+	}
+	50% {
+		transform: scale(1.15);
+		opacity: 1;
+	}
+}
+
+.fd-global-map-block {
+	// Outer glow rings – pulse in place with staggered delay per dot (so they don’t sync)
+	&__map circle[fill="#F7BA4F"] {
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: fd-global-map-dot-pulse 2s ease-in-out infinite;
+		transition:
+			transform 0.25s ease-in-out,
+			opacity 0.25s ease-in-out;
+	}
+
+	// Inner dot – color change on hover so it’s clear which marker is hovered
+	&__map circle[fill="#FF854D"] {
+		transition: fill 0.25s ease-in-out;
+	}
+
+	// Stagger by marker group (first <g> is clip-path, so markers are nth-of-type(2)…(8))
+	&__map .fd-global-map-marker:nth-of-type(2) circle[fill="#F7BA4F"] {
+		animation-delay: 0s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(3) circle[fill="#F7BA4F"] {
+		animation-delay: 0.28s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(4) circle[fill="#F7BA4F"] {
+		animation-delay: 0.57s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(5) circle[fill="#F7BA4F"] {
+		animation-delay: 0.85s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(6) circle[fill="#F7BA4F"] {
+		animation-delay: 0.14s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(7) circle[fill="#F7BA4F"] {
+		animation-delay: 0.43s;
+	}
+	&__map .fd-global-map-marker:nth-of-type(8) circle[fill="#F7BA4F"] {
+		animation-delay: 0.71s;
+	}
+
+	// Marker group: hover over label, line or dot keeps that dot’s glow at full scale + opacity
+	// Marker labels: fade in on scroll (JS adds --visible); SVG-compatible (AOS does not work on SVG)
+	&__map .fd-global-map-marker {
+		opacity: 0;
+		transition: opacity 600ms cubic-bezier(0.47, 0, 0.745, 0.715);
+	}
+	&__map .fd-global-map-marker--visible {
+		opacity: 1;
+	}
+
+	// Hit area: whole label box (including gaps between letters) triggers group hover
+	&__map .fd-global-map-marker__hit {
+		pointer-events: bounding-box;
+	}
+
+	// When group (path/circles) is hovered: glow at full scale, inner dot at 1.1 so you see you’re hovering
+	// &__map .fd-global-map-marker:hover circle[fill="#F7BA4F"] {
+	// 	animation: none;
+	// 	transform: scale(1.15);
+	// 	opacity: 1;
+	// }
+	// &__map .fd-global-map-marker:hover circle[fill="#FF854D"] {
+	// 	fill: #263143;
+	// }
+
+	// When only the hit area is hovered (e.g. gap between letters), same for sibling circles
+	// &__map .fd-global-map-marker__hit:hover ~ circle[fill="#F7BA4F"] {
+	// 	animation: none;
+	// 	transform: scale(1.15);
+	// 	opacity: 1;
+	// }
+	// &__map .fd-global-map-marker__hit:hover ~ circle[fill="#FF854D"] {
+	// 	fill: #263143;
+	// }
+
+	&--text-white {
+		color: $color__soft-white;
+
+		& .fd-global-map-block__title,
+		& .fd-global-map-block__subtitle {
+			color: $color__soft-white;
+		}
+	}
+
+	&--text-dark {
+		color: $color__text;
+
+		& .fd-global-map-block__title,
+		& .fd-global-map-block__subtitle {
+			color: $color__text;
+		}
+	}
+
+	&__map {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__wrapper {
+		position: relative;
+	}
+
+	&__content {
+		position: absolute;
+		bottom: 30px;
+		left: 0;
+		max-width: 650px;
+		z-index: 1;
+		@include media("<tablet") {
+			bottom: unset;
+			top: 25px;
+		}
+
+		@include media("<phone-land") {
+			top: 0px;
+		}
+
+		@include media("<phone") {
+			position: relative;
+			left: unset;
+			right: unset;
+			bottom: unset;
+			top: unset;
+			max-width: 100%;
+		}
+	}
+
+	&__title {
+		margin-bottom: 28px;
+
+		@include media("<tablet") {
+			margin-bottom: 20px;
+		}
+
+		@include media("<phone") {
+			margin-bottom: 10px;
+		}
+	}
+}

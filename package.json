@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "arrive": "^2.5.2",
     "countup.js": "^2.9.0",
     "include-media": "^2.0.0",
+    "jquery": "^4.0.0",
     "smoothscroll-polyfill": "^0.4.4",
     "swiper": "^12.1.2"
   },

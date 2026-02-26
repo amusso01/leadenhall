@@ -1,7 +1,9 @@
+import "arrive";
 import smoothscroll from "smoothscroll-polyfill";
 import hamburger from "../part/hamburger";
 import navigation from "../part/navigation";
-import initCountUp from "../part/countUp";
+import { COUNT_UP_SELECTOR, initCountUpElement } from "../part/countUp";
+import { GLOBAL_MAP_BLOCK_SELECTOR, initGlobalMapHitAreasForBlock } from "../part/globalMapHitArea";
 
 export default {
 	init() {
@@ -10,14 +12,19 @@ export default {
 		// kick off the polyfill!
 		smoothscroll.polyfill();
 
-		// Hamburger event listener
+		// Always on page: direct init (no arrive)
 		hamburger();
-
-		// Navigation event listener
 		navigation();
 
-		// CountUp: animate numbers when in view (.js-count-up[data-count-end])
-		initCountUp();
+		// CountUp: run only when component is on the page
+		document.arrive(COUNT_UP_SELECTOR, { existing: true }, (el) => {
+			initCountUpElement(el);
+		});
+
+		// Global map: run only when component is on the page
+		document.arrive(GLOBAL_MAP_BLOCK_SELECTOR, { existing: true }, (block) => {
+			initGlobalMapHitAreasForBlock(block);
+		});
 	},
 
 	finalize() {
