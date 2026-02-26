@@ -33,8 +33,12 @@ $rows = $has_roles ? (int) ceil(count($roles) / 2) : 0;
 
           <div class="sectors-skill-matrix__roles-grid" style="grid-template-rows: repeat(<?php echo $rows; ?>, auto);">
             <?php foreach ($roles as $item) : ?>
+              <?php $description = $item['description'] ?? ''; ?>
               <div class="sectors-skill-matrix__role">
-                <span><?php echo esc_html($item['role']); ?></span>
+                <span class="sectors-skill-matrix__role-title"><?php echo esc_html($item['role']); ?></span>
+                <?php if ($description) : ?>
+                  <p class="sectors-skill-matrix__role-desc"><?php echo esc_html($description); ?></p>
+                <?php endif; ?>
               </div>
             <?php endforeach; ?>
           </div>

@@ -5,6 +5,7 @@ import navigation from "../part/navigation";
 import { COUNT_UP_SELECTOR, initCountUpElement } from "../part/countUp";
 import { GLOBAL_MAP_BLOCK_SELECTOR, initGlobalMapHitAreasForBlock } from "../part/globalMapHitArea";
 import { HISTORY_SLIDER_SELECTOR, initHistorySlider } from "../part/historySlider";
+import { TEAM_SLIDER_SELECTOR, initTeamSlider } from "../part/teamSlider";
 
 export default {
 	init() {
@@ -30,6 +31,11 @@ export default {
 		// History slider (timeline): run only when block is on the page
 		document.arrive(HISTORY_SLIDER_SELECTOR, { existing: true }, (el) => {
 			initHistorySlider(el);
+		});
+
+		// Team slider: run only when block is on the page
+		document.arrive(TEAM_SLIDER_SELECTOR, { existing: true }, (el) => {
+			initTeamSlider(el);
 		});
 	},
 

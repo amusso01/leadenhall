@@ -13,6 +13,15 @@
 	padding-bottom: 70px;
 	background-color: #323c4e;
 
+	@include media("<tablet") {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	@include media("<phone") {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
 	&__title {
 		font-family: $header__fontname;
 		color: $color__main;
@@ -24,13 +33,10 @@
 	}
 
 	&__grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		gap: 36px;
-
-		@include media("<tablet") {
-			grid-template-columns: repeat(2, 1fr);
-		}
 
 		@include media("<phone-land") {
 			gap: 12px;
@@ -38,14 +44,21 @@
 	}
 
 	&__item {
+		width: calc((100% - 72px) / 3); /* 3 columns with 36px gap */
 		background-color: $color__darkest-blue;
 		padding: 37px 52px;
 		min-height: 196px;
 		display: flex;
+
 		flex-direction: column;
 		justify-content: center;
 
+		@include media("<tablet") {
+			width: calc((100% - 36px) / 2);
+		}
+
 		@include media("<phone-land") {
+			width: 100%;
 			padding: 25px 22px;
 			min-height: unset;
 		}
@@ -89,15 +102,28 @@
 	background-color: $color__darkest-blue;
 	color: $color__soft-white;
 
+	@include media("<tablet") {
+		padding-top: 70px;
+		padding-bottom: 70px;
+	}
+	@include media("<phone") {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
 	&__layout {
 		display: grid;
-		grid-template-columns: 1.5fr 1fr;
+		grid-template-columns: 1.25fr 1fr;
 		gap: 98px;
 		align-items: start;
 
 		@include media("<phone-land") {
 			grid-template-columns: 1fr;
 			gap: 48px;
+		}
+
+		@include media("<phone") {
+			gap: 32px;
 		}
 	}
 
@@ -126,9 +152,19 @@
 	&__role {
 		padding: 16px 0;
 		border-top: 1px solid $color__grey;
+	}
+
+	&__role-title {
 		font-size: 16px;
-		font-weight: 500;
+		font-weight: 600;
 		line-height: 26px;
+	}
+
+	&__role-desc {
+		font-size: 15px;
+		font-weight: 400;
+		line-height: 25px;
+		margin: 10px 0 0;
 	}
 
 	&__skills {
@@ -138,6 +174,9 @@
 		@include media("<phone-land") {
 			padding: 50px 32px;
 		}
+		@include media("<phone") {
+			padding: 32px 24px;
+		}
 	}
 
 	&__skills-title {
@@ -146,5 +185,143 @@
 
 	&__skills-content {
 		line-height: 26px;
+	}
+}
+
+.sectors-team {
+	padding-top: 108px;
+	padding-bottom: 108px;
+	color: $color__text;
+
+	@include media("<tablet") {
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
+	@include media("<phone") {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 36px;
+
+		@include media("<phone") {
+			flex-direction: column;
+			row-gap: 15px;
+			justify-content: flex-start;
+			align-items: flex-start;
+			margin-bottom: 20px;
+		}
+	}
+
+	&__nav {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		@include media("<phone") {
+			align-self: flex-end;
+		}
+	}
+
+	&__prev,
+	&__next {
+		background: none;
+		border: none;
+		color: $color__text;
+		cursor: pointer;
+		padding: 4px;
+		opacity: 0.7;
+		transition: opacity 0.2s;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		&.swiper-button-disabled {
+			opacity: 0.3;
+			cursor: default;
+		}
+	}
+
+	&__slider {
+		padding-left: 8rem;
+
+		@include media("<wideScreen") {
+			padding-left: 5rem;
+		}
+		@include media("<desktop") {
+			padding-left: 3.125rem;
+		}
+		@include media("<phone") {
+			padding-left: 1.25rem;
+		}
+	}
+
+	&__card {
+		user-select: none;
+	}
+
+	&__card-image {
+		width: 100%;
+		aspect-ratio: 3 / 3.6;
+		overflow: hidden;
+		margin-bottom: 18px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			display: block;
+		}
+	}
+
+	&__card-name {
+		font-size: 20px;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0 0 8px;
+	}
+
+	&__card-role {
+		font-size: 13px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		margin: 0;
+	}
+}
+
+.sectors-icon-grid {
+	background-color: $color__bright;
+	padding-top: 88px;
+	padding-bottom: 88px;
+	color: $color__text;
+
+	@include media("<tablet") {
+		padding-top: 70px;
+		padding-bottom: 70px;
+	}
+	@include media("<phone") {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	&__title {
+		font-family: $header__fontname;
+		text-align: center;
+		margin-bottom: 34px;
+	}
+
+	&__subtitle {
+		text-align: center;
+		font-size: 18px;
+		margin-bottom: 100px;
+
+		@include media("<phone-land") {
+			margin-bottom: 50px;
+		}
 	}
 }
