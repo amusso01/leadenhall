@@ -264,7 +264,7 @@
                     "label": "Infobox Number",
                     "name": "infobox_number",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "number",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
@@ -278,8 +278,9 @@
                     ],
                     "wrapper": { "width": "", "class": "", "id": "" },
                     "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
+                    "min": "",
+                    "max": "",
+                    "step": 1,
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
@@ -307,5 +308,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772132170
+    "modified": 1772617057
 }

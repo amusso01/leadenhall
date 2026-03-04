@@ -15,7 +15,7 @@ export function initMarqueeSlider(el) {
 		modules: [Autoplay],
 		loop: true,
 		loopAdditionalSlides: 10,
-		speed: 12000,
+		speed: 4500,
 		slidesPerView: "auto",
 		spaceBetween: 48,
 		autoplay: {
