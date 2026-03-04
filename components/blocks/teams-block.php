@@ -96,6 +96,7 @@ function foundry_gutenblock_teamsBlock($block, $content = '', $is_preview = fals
           $name        = get_the_title($member_id);
           $role        = get_field('role', $member_id);
           $thumbnail   = get_the_post_thumbnail($member_id, 'medium_large');
+          $content     = apply_filters('the_content', $member->post_content);
           $member_sectors = wp_get_post_terms($member_id, 'sector', array('fields' => 'slugs'));
           $sector_data = !is_wp_error($member_sectors) ? implode(' ', $member_sectors) : '';
         ?>
@@ -109,12 +110,34 @@ function foundry_gutenblock_teamsBlock($block, $content = '', $is_preview = fals
             <?php if ($role) : ?>
               <p class="fd-teams-block__card-role"><?php echo esc_html($role); ?></p>
             <?php endif; ?>
+            <div class="fd-teams-block__card-content" hidden>
+              <?php if ($role) : ?>
+                <span data-role="<?php echo esc_attr($role); ?>"></span>
+              <?php endif; ?>
+              <div class="fd-teams-block__card-bio"><?php echo $content; ?></div>
+            </div>
           </div>
         <?php endforeach; ?>
       </div>
 
       <!-- No results message -->
       <p class="fd-teams-block__no-results" style="display: none;">No team members found.</p>
+    </div>
+
+    <!-- Team Member Modal -->
+    <div class="fd-teams-block__modal" aria-hidden="true">
+      <div class="fd-teams-block__modal-overlay"></div>
+      <div class="fd-teams-block__modal-dialog" role="dialog" aria-modal="true">
+        <button class="fd-teams-block__modal-close" type="button" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <h3 class="fd-teams-block__modal-name"></h3>
+        <p class="fd-teams-block__modal-role"></p>
+        <div class="fd-teams-block__modal-bio"></div>
+      </div>
     </div>
   </section>
 <?php

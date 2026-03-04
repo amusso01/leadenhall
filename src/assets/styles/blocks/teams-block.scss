@@ -200,4 +200,96 @@
 		font-weight: 500;
 		padding: 40px 0;
 	}
+
+	// Modal
+	&__modal {
+		position: fixed;
+		inset: 0;
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+
+		&--open {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&__modal-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.55);
+	}
+
+	&__modal-dialog {
+		position: relative;
+		background: #fff;
+		width: 90%;
+		max-width: 500px;
+		max-height: 80vh;
+		overflow-y: auto;
+		padding: 40px;
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+		@include media("<phone") {
+			padding: 28px 20px;
+		}
+	}
+
+	&__modal-close {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 4px;
+		color: $color__text;
+		transition: opacity 0.2s ease;
+
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	&__modal-name {
+		font-family: $header__fontname;
+		font-size: 28px;
+		font-weight: 600;
+		margin: 0 0 6px;
+		padding-right: 30px;
+
+		@include media("<phone") {
+			font-size: 24px;
+		}
+	}
+
+	&__modal-role {
+		font-family: $text__fontname, sans-serif;
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: $color__soft-blue;
+		margin: 0 0 24px;
+	}
+
+	&__modal-bio {
+		font-family: $text__fontname, sans-serif;
+		font-size: 15px;
+		line-height: 1.7;
+		color: $color__text;
+		margin-top: 20px;
+
+		p {
+			margin: 0 0 14px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
 }

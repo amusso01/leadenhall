@@ -84,4 +84,51 @@ export function initTeamsBlock(block) {
       noResults.style.display = visibleCount === 0 ? "block" : "none";
     }
   }
+
+  // Modal
+  const modal = block.querySelector(".fd-teams-block__modal");
+  if (!modal) return;
+
+  const modalOverlay = modal.querySelector(".fd-teams-block__modal-overlay");
+  const modalClose = modal.querySelector(".fd-teams-block__modal-close");
+  const modalName = modal.querySelector(".fd-teams-block__modal-name");
+  const modalRole = modal.querySelector(".fd-teams-block__modal-role");
+  const modalBio = modal.querySelector(".fd-teams-block__modal-bio");
+
+  function openModal(card) {
+    const name = card.querySelector(".fd-teams-block__card-name")?.textContent || "";
+    const hidden = card.querySelector(".fd-teams-block__card-content");
+    const roleEl = hidden?.querySelector("[data-role]");
+    const bio = hidden?.querySelector(".fd-teams-block__card-bio")?.innerHTML || "";
+
+    modalName.textContent = name;
+    modalRole.textContent = roleEl ? roleEl.dataset.role : "";
+    modalRole.style.display = roleEl ? "" : "none";
+    modalBio.innerHTML = bio;
+    modalBio.querySelectorAll(".content-block").forEach((el) => el.classList.remove("content-block"));
+
+    modal.setAttribute("aria-hidden", "false");
+    modal.classList.add("fd-teams-block__modal--open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.setAttribute("aria-hidden", "true");
+    modal.classList.remove("fd-teams-block__modal--open");
+    document.body.style.overflow = "";
+  }
+
+  cards.forEach((card) => {
+    card.style.cursor = "pointer";
+    card.addEventListener("click", () => openModal(card));
+  });
+
+  modalOverlay.addEventListener("click", closeModal);
+  modalClose.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("fd-teams-block__modal--open")) {
+      closeModal();
+    }
+  });
 }
