@@ -22,6 +22,10 @@
 				> .menu-item {
 					> a {
 						color: $color__soft-white;
+
+						@include media("<tablet") {
+							color: $color__text;
+						}
 					}
 				}
 			}

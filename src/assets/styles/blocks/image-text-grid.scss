@@ -38,6 +38,7 @@
 
 		@include media("<phone-land") {
 			grid-template-columns: 1fr;
+			row-gap: 50px;
 		}
 	}
 
@@ -83,6 +84,22 @@
 		.fd-image-text-grid__item:nth-child(even)
 		.fd-image-text-grid__body {
 		order: 1;
+	}
+
+	// Mobile: always content first, image second (same specificity as odd/even so this wins)
+	@include media("<phone-land") {
+		&.image-left .fd-image-text-grid__item:nth-child(odd) .fd-image-text-grid__media,
+		&.image-left .fd-image-text-grid__item:nth-child(even) .fd-image-text-grid__media,
+		&.image-right .fd-image-text-grid__item:nth-child(odd) .fd-image-text-grid__media,
+		&.image-right .fd-image-text-grid__item:nth-child(even) .fd-image-text-grid__media {
+			order: 1;
+		}
+		&.image-left .fd-image-text-grid__item:nth-child(odd) .fd-image-text-grid__body,
+		&.image-left .fd-image-text-grid__item:nth-child(even) .fd-image-text-grid__body,
+		&.image-right .fd-image-text-grid__item:nth-child(odd) .fd-image-text-grid__body,
+		&.image-right .fd-image-text-grid__item:nth-child(even) .fd-image-text-grid__body {
+			order: 0;
+		}
 	}
 
 	.fd-image-text-grid__media {
