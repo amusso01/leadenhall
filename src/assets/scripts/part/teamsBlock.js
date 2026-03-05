@@ -4,11 +4,21 @@ export function initTeamsBlock(block) {
   const sectorToggle = block.querySelector(".fd-teams-block__sector-toggle");
   const sectorDropdown = block.querySelector(".fd-teams-block__sector-dropdown");
   const sectorOptions = block.querySelectorAll(".fd-teams-block__sector-option");
+  const subsectorContainer = block.querySelector("[data-subsector-container]");
+  const subsectorToggle = block.querySelector(".fd-teams-block__subsector-toggle");
+  const subsectorDropdown = block.querySelector(".fd-teams-block__subsector-dropdown");
   const searchInput = block.querySelector(".fd-teams-block__search-input");
   const cards = block.querySelectorAll(".fd-teams-block__card");
   const noResults = block.querySelector(".fd-teams-block__no-results");
 
+  let subsectorsBySector = {};
+  try {
+    const raw = block.dataset.subsectorsBySector;
+    if (raw) subsectorsBySector = JSON.parse(raw);
+  } catch (_) {}
+
   let activeSector = "";
+  let activeSubsector = "";
   let searchQuery = "";
 
   // Sector dropdown toggle
@@ -31,7 +41,8 @@ export function initTeamsBlock(block) {
   // Sector option click
   sectorOptions.forEach((option) => {
     option.addEventListener("click", () => {
-      activeSector = option.dataset.sector;
+      activeSector = option.dataset.sector || "";
+      activeSubsector = "";
 
       // Update active state
       sectorOptions.forEach((o) => o.classList.remove("fd-teams-block__sector-option--active"));
@@ -44,6 +55,36 @@ export function initTeamsBlock(block) {
           : "Search by sectors";
       }
 
+      // Show subsector dropdown only if this sector has children; populate options
+      const subsectorList = subsectorsBySector[activeSector] || [];
+      if (subsectorContainer && subsectorToggle && subsectorDropdown) {
+        if (subsectorList.length > 0) {
+          subsectorContainer.style.display = "";
+          const optionsContainer = subsectorDropdown;
+          optionsContainer.innerHTML = "";
+          const allBtn = document.createElement("button");
+          allBtn.className = "fd-teams-block__subsector-option fd-teams-block__subsector-option--active";
+          allBtn.dataset.subsector = "";
+          allBtn.type = "button";
+          allBtn.textContent = "All subsectors";
+          optionsContainer.appendChild(allBtn);
+          subsectorList.forEach((s) => {
+            const btn = document.createElement("button");
+            btn.className = "fd-teams-block__subsector-option";
+            btn.dataset.subsector = s.slug;
+            btn.type = "button";
+            btn.textContent = s.name;
+            optionsContainer.appendChild(btn);
+          });
+          if (subsectorToggle.querySelector("span")) {
+            subsectorToggle.querySelector("span").textContent = "All subsectors";
+          }
+          bindSubsectorOptions();
+        } else {
+          subsectorContainer.style.display = "none";
+        }
+      }
+
       // Close dropdown
       if (sectorToggle && sectorDropdown) {
         sectorToggle.setAttribute("aria-expanded", "false");
@@ -53,6 +94,51 @@ export function initTeamsBlock(block) {
       filterCards();
     });
   });
+
+  function bindSubsectorOptions() {
+    const subsectorOptions = block.querySelectorAll(".fd-teams-block__subsector-option");
+    subsectorOptions.forEach((option) => {
+      option.addEventListener("click", () => {
+        activeSubsector = option.dataset.subsector || "";
+
+        subsectorOptions.forEach((o) => o.classList.remove("fd-teams-block__subsector-option--active"));
+        option.classList.add("fd-teams-block__subsector-option--active");
+
+        if (subsectorToggle && subsectorToggle.querySelector("span")) {
+          subsectorToggle.querySelector("span").textContent = activeSubsector
+            ? option.textContent.trim()
+            : "All subsectors";
+        }
+
+        if (subsectorToggle && subsectorDropdown) {
+          subsectorToggle.setAttribute("aria-expanded", "false");
+          subsectorDropdown.classList.remove("fd-teams-block__subsector-dropdown--open");
+        }
+
+        filterCards();
+      });
+    });
+  }
+
+  // Subsector dropdown toggle
+  if (subsectorToggle && subsectorDropdown) {
+    subsectorToggle.addEventListener("click", () => {
+      const isOpen = subsectorToggle.getAttribute("aria-expanded") === "true";
+      subsectorToggle.setAttribute("aria-expanded", !isOpen);
+      subsectorDropdown.classList.toggle("fd-teams-block__subsector-dropdown--open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        subsectorContainer &&
+        !subsectorToggle.contains(e.target) &&
+        !subsectorDropdown.contains(e.target)
+      ) {
+        subsectorToggle.setAttribute("aria-expanded", "false");
+        subsectorDropdown.classList.remove("fd-teams-block__subsector-dropdown--open");
+      }
+    });
+  }
 
   // Search input
   if (searchInput) {
@@ -64,12 +150,23 @@ export function initTeamsBlock(block) {
 
   function filterCards() {
     let visibleCount = 0;
+    const cardSectorSlugs = (s) => (s || "").trim().split(/\s+/).filter(Boolean);
 
     cards.forEach((card) => {
-      const cardSectors = card.dataset.sectors || "";
+      const slugs = cardSectorSlugs(card.dataset.sectors);
       const cardName = card.dataset.name || "";
 
-      const matchesSector = !activeSector || cardSectors.split(" ").includes(activeSector);
+      let matchesSector = true;
+      if (activeSubsector) {
+        matchesSector = slugs.includes(activeSubsector);
+      } else if (activeSector) {
+        const allowedSlugs = [
+          activeSector,
+          ...(subsectorsBySector[activeSector] || []).map((s) => s.slug),
+        ];
+        matchesSector = slugs.some((slug) => allowedSlugs.includes(slug));
+      }
+
       const matchesSearch = !searchQuery || cardName.includes(searchQuery);
 
       if (matchesSector && matchesSearch) {

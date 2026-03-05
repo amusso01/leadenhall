@@ -52,16 +52,42 @@ function foundry_gutenblock_teamsBlock($block, $content = '', $is_preview = fals
     'post_status'    => 'publish',
   ));
 
-  // Fetch all sectors
+  // Fetch top-level sectors only (subsectors are child terms)
   $sectors = get_terms(array(
+    'taxonomy'   => 'sector',
+    'parent'     => 0,
+    'hide_empty' => true,
+  ));
+
+  // Build subsectors-by-sector map (parent slug => array of { slug, name }) for JS filtering and labels
+  $all_sector_terms = get_terms(array(
     'taxonomy'   => 'sector',
     'hide_empty' => true,
   ));
+  $subsectors_by_sector = array();
+  if (!is_wp_error($all_sector_terms)) {
+    foreach ($all_sector_terms as $term) {
+      if ($term->parent) {
+        $parent_term = get_term($term->parent, 'sector');
+        if (!is_wp_error($parent_term)) {
+          $parent_slug = $parent_term->slug;
+          if (!isset($subsectors_by_sector[$parent_slug])) {
+            $subsectors_by_sector[$parent_slug] = array();
+          }
+          $subsectors_by_sector[$parent_slug][] = array(
+            'slug' => $term->slug,
+            'name' => $term->name,
+          );
+        }
+      }
+    }
+  }
 ?>
-  <section id="<?php echo esc_attr($block_id); ?>" class="fd-teams-block">
+  <section id="<?php echo esc_attr($block_id); ?>" class="fd-teams-block" data-subsectors-by-sector="<?php echo esc_attr(wp_json_encode($subsectors_by_sector)); ?>">
     <div class="content-block">
       <!-- Filters -->
       <div class="fd-teams-block__filters">
+        <div class="fd-teams-block__filters-sector-group">
         <div class="fd-teams-block__filter-sector">
           <button class="fd-teams-block__sector-toggle" type="button" aria-expanded="false">
             <span>Search by sectors</span>
@@ -79,6 +105,19 @@ function foundry_gutenblock_teamsBlock($block, $content = '', $is_preview = fals
               <?php endforeach; ?>
             </div>
           <?php endif; ?>
+        </div>
+        <div class="fd-teams-block__filter-subsector" style="display: none;" data-subsector-container>
+          <button class="fd-teams-block__subsector-toggle" type="button" aria-expanded="false">
+            <span>All subsectors</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="fd-teams-block__subsector-dropdown">
+            <button class="fd-teams-block__subsector-option fd-teams-block__subsector-option--active" data-subsector="" type="button">All subsectors</button>
+            <!-- Subsector options injected by JS from data-subsectors-by-sector -->
+          </div>
+        </div>
         </div>
         <div class="fd-teams-block__filter-search">
           <input type="text" class="fd-teams-block__search-input" placeholder="Search by name" />

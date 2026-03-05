@@ -24,6 +24,19 @@
 		}
 	}
 
+	// Sector + subsector grouped on the left, side by side
+	&__filters-sector-group {
+		display: flex;
+		align-items: flex-start;
+		gap: 20px;
+		flex-wrap: wrap;
+
+		@include media("<phone-land") {
+			flex-direction: column;
+			gap: 16px;
+		}
+	}
+
 	&__filter-sector {
 		position: relative;
 	}
@@ -68,6 +81,76 @@
 	}
 
 	&__sector-option {
+		background: none;
+		border: none;
+		padding: 10px 20px;
+		text-align: left;
+		cursor: pointer;
+		font-family: $text__fontname, sans-serif;
+		font-size: 14px;
+		color: $color__text;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: $color__grey;
+		}
+
+		&--active {
+			font-weight: 600;
+			color: $color__main;
+		}
+	}
+
+	// Subsector filter (shown when selected sector has children)
+	&__filter-subsector {
+		position: relative;
+		margin-left: 10px;
+
+		@include media("<phone-land") {
+			margin-left: 0;
+		}
+	}
+
+	&__subsector-toggle {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-family: $text__fontname, sans-serif;
+		font-size: 16px;
+		padding: 10px 0;
+		font-weight: 500;
+
+		svg {
+			transition: transform 0.3s ease;
+		}
+
+		&[aria-expanded="true"] svg {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__subsector-dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: #fff;
+		min-width: 220px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
+		z-index: 10;
+		display: none;
+		flex-direction: column;
+		padding: 8px 0;
+
+		&--open {
+			display: flex;
+		}
+	}
+
+	&__subsector-option {
 		background: none;
 		border: none;
 		padding: 10px 20px;
@@ -211,7 +294,9 @@
 		justify-content: center;
 		opacity: 0;
 		visibility: hidden;
-		transition: opacity 0.3s ease, visibility 0.3s ease;
+		transition:
+			opacity 0.3s ease,
+			visibility 0.3s ease;
 
 		&--open {
 			opacity: 1;

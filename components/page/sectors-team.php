@@ -15,9 +15,10 @@ $team_members = new WP_Query(array(
   'posts_per_page' => -1,
   'tax_query'      => array(
     array(
-      'taxonomy' => 'sector',
-      'field'    => 'term_id',
-      'terms'    => $term->term_id,
+      'taxonomy'         => 'sector',
+      'field'            => 'term_id',
+      'terms'            => $term->term_id,
+      'include_children' => true,
     ),
   ),
 ));
